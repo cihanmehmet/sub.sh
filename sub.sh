@@ -13,28 +13,28 @@ then
 else
 	curl 'https://crt.sh/?q=%.'$1'&output=json' | jq '.[] | {name_value}' | sed 's/\"//g' | sed 's/\*\.//g' | sort -u |grep "name_value"|cut -d ' ' -f4 > $1.txt
 
-		echo "Crt.sh Over"
+		echo "[+] Crt.sh Over"
 
 	curl -s "http://web.archive.org/cdx/search/cdx?url=*."$1"/*&output=text&fl=original&collapse=urlkey" |sort| sed -e 's_https*://__' -e "s/\/.*//" -e 's/:.*//' -e 's/^www\.//' | uniq >>$1.txt
 
-		echo "Web.Archive Over"
+		echo "[+] Web.Archive.org Over"
 
 	curl -s "https://dns.bufferover.run/dns?q=."$1 | jq -r .FDNS_A[]|cut -d',' -f2|sort -u >>$1.txt
 
-		echo "Dns.bufferover.run Over"
+		echo "[+] Dns.bufferover.run Over"
 
 	curl -s "https://certspotter.com/api/v0/certs?domain="$1 | jq '.[].dns_names[]' | sed 's/\"//g' | sed 's/\*\.//g' | sort -u | grep $1 >>$1.txt
 
-		echo "Certspotter Over"
-		echo "Next 2 operations are waiting a bit.(Amass and Subfinder)"
+		echo "[+] Certspotter.com Over"
+		echo "[i] Next 2 operations are waiting a bit.(Amass and Subfinder)"
 
 	curl -s  -X POST --data "url=$1&Submit1=Submit" https://suip.biz/?act=amass | grep $1 | cut -d ">" -f 2 | awk 'NF' | uniq >>$1.txt
 
-		echo "Suip.biz Amass Over"
+		echo "[+] Suip.biz Amass Over"
 
 	curl -s  -X POST --data "url=$1&Submit1=Submit" https://suip.biz/?act=subfinder | grep $1 | cut -d ">" -f 2 | awk 'NF' | uniq >>$1.txt
 
-		echo "Suip.biz Subfinder Over"
+		echo "[+] Suip.biz Subfinder Over"
 
 	#sort -u $1.txt|cat
 	cat $1.txt|sort|sort -u|egrep -v "^http$|https$"|tee $1.txt
