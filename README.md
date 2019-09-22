@@ -6,7 +6,7 @@
 
 ```bash sub.sh bing.com```
 
-![image](https://i.ibb.co/1Gx8nVh/sub-sh.png)
+![image](https://i.ibb.co/LNGWLxv/script.png)
 
 ### Curl
 
