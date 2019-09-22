@@ -1,0 +1,45 @@
+#!/bin/bash
+
+echo "Online Subdomain Detect Script"
+echo "Twitter => https://twitter.com/cihanmehmets"
+echo "Github => https://github.com/cihanmehmet"
+echo "CURL Subdomain Execute => curl -s -L https://git.io/JesCa | bash -s bing.com"
+echo "█████████████████████████████████████████████████████████████████████████████████████"
+
+if [[ $# -eq 0 ]] ;
+then
+	echo "Usage: bash sub.sh bing.com"
+	exit 1
+else
+	curl 'https://crt.sh/?q=%.'$1'&output=json' | jq '.[] | {name_value}' | sed 's/\"//g' | sed 's/\*\.//g' | sort -u |grep "name_value"|cut -d ' ' -f4 > $1.txt
+
+		echo "Crt.sh Over"
+
+	curl -s "http://web.archive.org/cdx/search/cdx?url=*."$1"/*&output=text&fl=original&collapse=urlkey" |sort| sed -e 's_https*://__' -e "s/\/.*//" -e 's/:.*//' -e 's/^www\.//' | uniq >>$1.txt
+
+		echo "Web.Archive Over"
+
+	curl -s "https://dns.bufferover.run/dns?q=."$1 | jq -r .FDNS_A[]|cut -d',' -f2|sort -u >>$1.txt
+
+		echo "Dns.bufferover.run Over"
+
+	curl -s "https://certspotter.com/api/v0/certs?domain="$1 | jq '.[].dns_names[]' | sed 's/\"//g' | sed 's/\*\.//g' | sort -u | grep $1 >>$1.txt
+
+		echo "Certspotter Over"
+
+	curl -s  -X POST --data "url=$1&Submit1=Submit" https://suip.biz/?act=amass | grep $1 | cut -d ">" -f 2 | awk 'NF' | uniq >>$1.txt
+
+		echo "Suip.biz Amass Over"
+
+	curl -s  -X POST --data "url=$1&Submit1=Submit" https://suip.biz/?act=subfinder | grep $1 | cut -d ">" -f 2 | awk 'NF' | uniq >>$1.txt
+
+		echo "Suip.biz Subfinder Over"
+
+	sort $1.txt|uniq>$1.txt
+
+	cat $1.txt
+	echo "█████████████████████████████████████████████████████████████████████████████████████"
+	echo "Detect Subdomain $(wc -l $1.txt|awk '{ print $1 }' )" "=> ${1}"
+	echo "File Location : "$(pwd)/"$1.txt"
+
+fi
