@@ -4,7 +4,7 @@ echo "Online Subdomain Detect Script"
 echo "Twitter => https://twitter.com/cihanmehmets"
 echo "Github => https://github.com/cihanmehmet"
 echo "CURL Subdomain Execute => curl -s -L https://raw.githubusercontent.com/cihanmehmet/sub.sh/master/sub.sh | bash -s bing.com"
-echo "█████████████████████████████████████████████████████████████████████████████████████"
+echo "██████████████████████████████████████████████████████████████████████████████████████████████████████████████"
 
 if [[ $# -eq 0 ]] ;
 then
@@ -26,6 +26,7 @@ else
 	curl -s "https://certspotter.com/api/v0/certs?domain="$1 | jq '.[].dns_names[]' | sed 's/\"//g' | sed 's/\*\.//g' | sort -u | grep $1 >>$1.txt
 
 		echo "Certspotter Over"
+		echo "Next 2 operations are waiting a bit.(Amass and Subfinder)"
 
 	curl -s  -X POST --data "url=$1&Submit1=Submit" https://suip.biz/?act=amass | grep $1 | cut -d ">" -f 2 | awk 'NF' | uniq >>$1.txt
 
@@ -35,9 +36,10 @@ else
 
 		echo "Suip.biz Subfinder Over"
 
-	sort -u $1.txt|cat
+	#sort -u $1.txt|cat
+	cat $1.txt|sort|sort -u|egrep -v "^http$|https$"|tee $1.txt
 
-	echo "█████████████████████████████████████████████████████████████████████████████████████"
+	echo "██████████████████████████████████████████████████████████████████████████████████████████████████████"
 	echo "Detect Subdomain $(wc -l $1.txt|awk '{ print $1 }' )" "=> ${1}"
 	echo "File Location : "$(pwd)/"$1.txt"
 
