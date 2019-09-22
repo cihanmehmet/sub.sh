@@ -3,7 +3,7 @@
 echo "Online Subdomain Detect Script"
 echo "Twitter => https://twitter.com/cihanmehmets"
 echo "Github => https://github.com/cihanmehmet"
-echo "CURL Subdomain Execute => curl -s -L https://git.io/JesCa | bash -s bing.com"
+echo "CURL Subdomain Execute => curl -s -L https://raw.githubusercontent.com/cihanmehmet/sub.sh/master/sub.sh | bash -s bing.com"
 echo "█████████████████████████████████████████████████████████████████████████████████████"
 
 if [[ $# -eq 0 ]] ;
@@ -35,9 +35,8 @@ else
 
 		echo "Suip.biz Subfinder Over"
 
-	sort $1.txt|uniq>$1.txt
+	sort -u $1.txt|cat
 
-	cat $1.txt
 	echo "█████████████████████████████████████████████████████████████████████████████████████"
 	echo "Detect Subdomain $(wc -l $1.txt|awk '{ print $1 }' )" "=> ${1}"
 	echo "File Location : "$(pwd)/"$1.txt"
