@@ -8,7 +8,6 @@
 bash sub.sh webscantest.com 
 ./sub.sh webscantest.com
 ```
-
 ![image](https://i.ibb.co/qBKPhHS/script.png)
 
 ### Curl
