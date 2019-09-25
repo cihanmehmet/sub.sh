@@ -18,3 +18,18 @@ curl -s -L https://raw.githubusercontent.com/cihanmehmet/sub.sh/master/sub.sh | 
 
 ![image](https://i.ibb.co/txtRKfq/online.png)
 
+
+### Subdomain Alive Check
+
+```
+bash sub_alive.sh bing.com
+curl -s -L https://raw.githubusercontent.com/cihanmehmet/sub.sh/master/sub_alive.sh | bash -s bing.com"
+```
+
+‼️fping required
+
+![image](https://i.ibb.co/5K7BWbQ/alive.png)
+
+```
+## 💻 I am open to suggestions for improvement.
+```
