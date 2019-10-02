@@ -5,7 +5,10 @@
 ### Script
 
 ```
-bash sub.sh webscantest.com 
+bash sub.sh webscantest.com
+```
+
+```
 ./sub.sh webscantest.com
 ```
 ![image](https://i.ibb.co/qBKPhHS/script.png)
@@ -22,6 +25,9 @@ curl -s -L https://raw.githubusercontent.com/cihanmehmet/sub.sh/master/sub.sh | 
 
 ```
 bash sub_alive.sh bing.com
+```
+
+```
 curl -s -L https://raw.githubusercontent.com/cihanmehmet/sub.sh/master/sub_alive.sh | bash -s bing.com"
 ```
 
