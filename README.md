@@ -38,8 +38,10 @@ curl -s -L https://raw.githubusercontent.com/cihanmehmet/sub.sh/master/sub_alive
 
 - - -
 
-### Nmap -sn (No port scan) scan live IP detection script
-## fping -f ip.txt
+## 🔓 Nmap -sn (No port scan) scan live IP detection script
+```
+fping -f ip.txt
+```
 ## Usage ```bash nmap_sn.sh ip.txt```
 <img width="437" alt="ping" src="https://user-images.githubusercontent.com/7144304/65437229-f7390e80-de12-11e9-8a7e-a74325432284.png">
 
