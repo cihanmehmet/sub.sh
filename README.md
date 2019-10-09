@@ -76,6 +76,9 @@ cat domains.txt | dnsgen - |fping|grep "alive"|cut -d " " -f1>resolvers.txt
 ```
 cat domains.txt | dnsgen - |httprobe|cut -d "/" -f3|sort -u |tee resolvers.txt
 ```
+```
+dnsgen domain.txt -w subdomains-10000.txt|httprobe|cut -d "/" -f3|sort -u |tee dnsgen.txt
+```
 <img width="645" alt="resolver" src="https://user-images.githubusercontent.com/7144304/65857924-87c0a300-e36d-11e9-91d8-59d3f5ff50c5.png">
 
 ## :triangular_flag_on_post: 💻 I am open to suggestions for improvement.
