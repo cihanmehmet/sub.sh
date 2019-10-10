@@ -5,17 +5,17 @@
 
 ### Script 🎯
 
-```
+```bash
 bash sub.sh webscantest.com
 ```
 
-```
+```bash
 ./sub.sh webscantest.com
 ```
 ![image](https://i.ibb.co/qBKPhHS/script.png)
 
 ### Curl 🎯
-```
+```bash
 curl -s -L https://raw.githubusercontent.com/cihanmehmet/sub.sh/master/sub.sh | bash -s webscantest.com
 ```
 
@@ -25,11 +25,11 @@ curl -s -L https://raw.githubusercontent.com/cihanmehmet/sub.sh/master/sub.sh | 
 
 ### Subdomain Alive Check 🎯
 
-```
+```bash
 bash sub_alive.sh bing.com
 ```
 
-```
+```bash
 curl -s -L https://raw.githubusercontent.com/cihanmehmet/sub.sh/master/sub_alive.sh | bash -s bing.com"
 ```
 
@@ -69,15 +69,21 @@ pip install dnsgen
 
 ## 🔖 Sample usage 
 ### Usage 1(fping)[fping](https://github.com/schweikert/fping) 🎯
-```
+```bash
 cat domains.txt | dnsgen - |fping|grep "alive"|cut -d " " -f1>resolvers.txt
 ```
 ### Usage 2([httprobe](https://github.com/tomnomnom/httprobe) ) 🎯
-```
+```bash
 cat domains.txt | dnsgen - |httprobe|cut -d "/" -f3|sort -u |tee resolvers.txt
 ```
-```
+```bash
 dnsgen domain.txt -w subdomains-10000.txt|httprobe|cut -d "/" -f3|sort -u |tee dnsgen.txt
+```
+```
+pip3 install ludicrousdns 
+```
+```bash
+cat domain.txt|ludicrousdns resolve |cut -d " " -f1
 ```
 <img width="645" alt="resolver" src="https://user-images.githubusercontent.com/7144304/65857924-87c0a300-e36d-11e9-91d8-59d3f5ff50c5.png">
 
