@@ -87,4 +87,19 @@ cat domain.txt|ludicrousdns resolve |cut -d " " -f1
 ```
 <img width="645" alt="resolver" src="https://user-images.githubusercontent.com/7144304/65857924-87c0a300-e36d-11e9-91d8-59d3f5ff50c5.png">
 
+## 🔑 📜 Subdomain Detect Terminal Shortcut Function
+### nano ~/.zshrc
+or
+### nano ~/.bashrc
+
+```bash
+function subdomain() { curl -s -L https://git.io/JesKK | bash -s $1 
+cat $1.txt|httprobe|cut -d "/" -f3|sort -u |tee $1.txt 
+echo "██████████████████████████████████████████████████████████████████████████████████████████████████████"
+echo "Detect Alive Subdomain $(wc -l $1.txt|awk '{ print $1 }' )" "=> ${1}"
+echo "File Location : "$(pwd)/"$1.txt"
+}
+```
+<img width="994" alt="subdomain" src="https://user-images.githubusercontent.com/7144304/67149562-143ef100-f29c-11e9-9ba0-1f2db208fd62.png">
+
 ## :triangular_flag_on_post: 💻 I am open to suggestions for improvement.
