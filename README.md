@@ -89,6 +89,19 @@ pip install dnsgen
 cat domains.txt | dnsgen - |fping|grep "alive"|cut -d " " -f1>resolvers.txt
 ```
 ### Usage 2([httprobe](https://github.com/tomnomnom/httprobe) ) 🎯
+
+## Kali Linux httprobe Install 🔑
+```bash
+wget https://github.com/tomnomnom/httprobe/releases/download/v0.1.2/httprobe-linux-amd64-0.1.2.tgz
+```
+```bash
+cp httprobe /usr/share/bin 
+```
+```
+chmod +x /usr/share/bin/httprobe
+```
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+## Tool Usage
 ```bash
 cat domains.txt | dnsgen - |httprobe|cut -d "/" -f3|sort -u |tee resolvers.txt
 ```
@@ -102,6 +115,8 @@ pip3 install ludicrousdns
 cat domain.txt|ludicrousdns resolve |cut -d " " -f1
 ```
 <img width="645" alt="resolver" src="https://user-images.githubusercontent.com/7144304/65857924-87c0a300-e36d-11e9-91d8-59d3f5ff50c5.png">
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 ## 🔑 📜 Subdomain Detect Terminal Shortcut Function
 ### nano ~/.zshrc
@@ -118,4 +133,5 @@ echo "File Location : "$(pwd)/"$1.txt"
 ```
 <img width="994" alt="subdomain" src="https://user-images.githubusercontent.com/7144304/67149562-143ef100-f29c-11e9-9ba0-1f2db208fd62.png">
 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 ## :triangular_flag_on_post: 💻 I am open to suggestions for improvement.
