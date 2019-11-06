@@ -1,9 +1,22 @@
-# Online Subdomain Detect Script [![CMD](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
+# 🎯🕸📘 Online Subdomain Detect Script [![CMD](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 
 ## https://github.com/cihanmehmet/sub.sh
+
+## ‼️ [jq](https://stedolan.github.io/jq/download/) required 📌
+
+## Linux Install (Debian,Kali Linux,Ubuntu) 
+```bash
+sudo apt-get install jq
+```
+
+### MAC OSX Install
+```bash
+brew install jq
+```
+
 ## USAGE 💡
 
-### Script 🎯
+### Script Usage 🎯
 
 ```bash
 bash sub.sh webscantest.com
@@ -14,11 +27,14 @@ bash sub.sh webscantest.com
 ```
 ![image](https://i.ibb.co/qBKPhHS/script.png)
 
-### Curl 🎯
+### Curl Usage 🎯
 ```bash
 curl -s -L https://raw.githubusercontent.com/cihanmehmet/sub.sh/master/sub.sh | bash -s webscantest.com
 ```
-
+### 🔖 Curl shortened link usage
+```
+curl -s -L https://git.io/JesKK | bash -s tesla.com
+```
 ![image](https://i.ibb.co/txtRKfq/online.png)
 
 - - -
