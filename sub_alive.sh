@@ -26,7 +26,7 @@ else
 	curl -s "https://certspotter.com/api/v0/certs?domain="$1 | jq '.[].dns_names[]' | sed 's/\"//g' | sed 's/\*\.//g' | sort -u | grep $1 >>$1.txt
 
 		echo "[+] Certspotter.com Over"
-		echo "[i] Next 2 operations are waiting a bit.(Amass and Subfinder)"
+		echo "[i] Next 3 operations are waiting a bit.(Amass, Subfinder and Findomain)"
 
 	curl -s  -X POST --data "url=$1&Submit1=Submit" https://suip.biz/?act=amass | grep $1 | cut -d ">" -f 2 | awk 'NF' | uniq >>$1.txt
 
@@ -35,6 +35,10 @@ else
 	curl -s  -X POST --data "url=$1&Submit1=Submit" https://suip.biz/?act=subfinder | grep $1 | cut -d ">" -f 2 | awk 'NF' | uniq >>$1.txt
 
 		echo "[+] Suip.biz Subfinder Over"
+		
+       curl -s X POST --data "url=$1&only_resolved=1&Submit1=Submit" https://suip.biz/?act=findomain| grep $1 | cut -d ">" -f 2 | awk 'NF' |egrep -v "[[:space:]]"|uniq >> $1.txt
+                
+	        echo "[+] Suip.biz Findomain Over"
 
 	#sort -u $1.txt|cat
 	cat $1.txt|sort|sort -u|egrep -v "^http$|https$"|tee $1.txt
