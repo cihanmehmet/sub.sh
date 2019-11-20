@@ -36,7 +36,7 @@ else
 
 		echo "[+] Suip.biz Subfinder Over"
 		
-       curl -s X POST --data "url=$1&only_resolved=1&Submit1=Submit" https://suip.biz/?act=findomain| grep $1 | cut -d ">" -f 2 | awk 'NF' |egrep -v "[[:space:]]"|uniq >> $1.txt
+        curl -s -X POST --data "url=$1&only_resolved=1&Submit1=Submit" https://suip.biz/?act=findomain| grep $1 | cut -d ">" -f 2 | awk 'NF' |egrep -v "[[:space:]]"|uniq >> $1.txt
                 
 	        echo "[+] Suip.biz Findomain Over"
 
