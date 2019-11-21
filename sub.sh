@@ -41,7 +41,7 @@ else
 	        echo "[+] Suip.biz Findomain Over"
 
 	#sort -u $1.txt|cat
-	cat $1.txt|sort|sort -u|egrep -v "^http$|https$"|tee $1.txt
+	cat $1.txt|sort -u|egrep -v "^http$|https$"|tee $1.txt
 
 	echo "██████████████████████████████████████████████████████████████████████████████████████████████████████"
 	echo "Detect Subdomain $(wc -l $1.txt|awk '{ print $1 }' )" "=> ${1}"
