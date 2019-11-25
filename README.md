@@ -29,11 +29,11 @@ bash sub.sh webscantest.com
 
 ### Curl Usage 🎯
 ```bash
-curl -s -L https://raw.githubusercontent.com/cihanmehmet/sub.sh/master/sub.sh | bash -s webscantest.com
+curl -sL https://raw.githubusercontent.com/cihanmehmet/sub.sh/master/sub.sh | bash -s webscantest.com
 ```
 ### 🔖 Curl shortened link usage
 ```
-curl -s -L https://git.io/JesKK | bash -s tesla.com
+curl -sL https://git.io/JesKK | bash -s tesla.com
 ```
 ![image](https://i.ibb.co/txtRKfq/online.png)
 
@@ -124,7 +124,7 @@ or
 ### nano ~/.bashrc
 
 ```bash
-function subdomain() { curl -s -L https://git.io/JesKK | bash -s $1 
+function subdomain() { curl -sL https://git.io/JesKK | bash -s $1 
 cat $1.txt|httprobe|cut -d "/" -f3|sort -u |tee $1.txt 
 echo "██████████████████████████████████████████████████████████████████████████████████████████████████████"
 echo "Detect Alive Subdomain $(wc -l $1.txt|awk '{ print $1 }' )" "=> ${1}"
