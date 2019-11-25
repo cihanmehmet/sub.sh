@@ -49,8 +49,8 @@ else
 	echo " "
 	echo "[+] Checking Accessibility of Detected Domains"
 	echo "  "
-	fping -f $1.txt|grep "is alive"|cut -d " " -f1>$1_alive.txt
-	
+        #fping -f $1.txt|grep "is alive"|cut -d " " -f1>$1_alive.txt
+	fping -a -f $1.txt 2>/dev/null |tee alive_$1.txt
 	echo "██████████████████████████████████████████████████████████████████████████████████████████████████████"
 	echo "Detect Alive Subdomain $(wc -l $1_alive.txt|awk '{ print $1 }' )" "=> ${1}"
 	echo "File Location : "$(pwd)/"$1_alive.txt"	
