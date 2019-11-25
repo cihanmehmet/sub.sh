@@ -46,7 +46,7 @@ bash sub_alive.sh bing.com
 ```
 
 ```bash
-curl -s -L https://raw.githubusercontent.com/cihanmehmet/sub.sh/master/sub_alive.sh | bash -s bing.com
+curl -sL https://raw.githubusercontent.com/cihanmehmet/sub.sh/master/sub_alive.sh | bash -s bing.com
 ```
 
 ## ‼️ fping required
