@@ -94,12 +94,12 @@ cat domains.txt | dnsgen - |fping|grep "alive"|cut -d " " -f1>resolvers.txt
 ```bash
 wget https://github.com/tomnomnom/httprobe/releases/download/v0.1.2/httprobe-linux-amd64-0.1.2.tgz
 ```
-```bash
-cp httprobe /usr/share/bin 
-```
-```
-chmod +x /usr/share/bin/httprobe
-```
+` bash tar -xvzf httprobe-linux-amd64-0.1.2.tgz `
+
+` cp httprobe /usr/local/bin `
+
+` chmod +x /usr/local/bin/httprobe`
+
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 ## Tool Usage
 ```bash
