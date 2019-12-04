@@ -134,4 +134,10 @@ echo "File Location : "$(pwd)/"$1.txt"
 <img width="994" alt="subdomain" src="https://user-images.githubusercontent.com/7144304/67149562-143ef100-f29c-11e9-9ba0-1f2db208fd62.png">
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+## 🧵 Docker Usage
+### https://github.com/cihanmehmet/sub.sh/issues/4
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
 ## :triangular_flag_on_post: 💻 I am open to suggestions for improvement.
