@@ -1,17 +1,18 @@
 #!/bin/bash
 
-echo "Online Subdomain Detect Script"
-echo "Twitter => https://twitter.com/cihanmehmets"
-echo "Github => https://github.com/cihanmehmet"
-echo "CURL Subdomain Execute => curl -s -L https://raw.githubusercontent.com/cihanmehmet/sub.sh/master/sub.sh | bash -s bing.com"
-echo "██████████████████████████████████████████████████████████████████████████████████████████████████████████████"
+echo "[i] Online Subdomain Detect Script"
+echo "[t] Twitter => https://twitter.com/cihanmehmets"
+echo "[g] Github => https://github.com/cihanmehmet"
+echo "[#] curl -sL https://raw.githubusercontent.com/cihanmehmet/sub.sh/master/sub.sh | bash -s bing.com"
+echo "[#] curl -sL https://git.io/JesKK | bash -s tesla.com"
+echo "███████████████████████████████████████████████████████████████████████████████████████████████"
 
 if [[ $# -eq 0 ]] ;
 then
 	echo "Usage: bash sub.sh bing.com"
 	exit 1
 else
-	curl 'https://crt.sh/?q=%.'$1'&output=json' | jq '.[] | {name_value}' | sed 's/\"//g' | sed 's/\*\.//g' | sort -u |grep "name_value"|cut -d ' ' -f4 > $1.txt
+	curl -s 'https://crt.sh/?q=%.'$1'&output=json' | jq '.[] | {name_value}' | sed 's/\"//g' | sed 's/\*\.//g' | sort -u |grep "name_value"|cut -d ' ' -f4 > $1.txt
 
 		echo "[+] Crt.sh Over"
 
@@ -23,8 +24,13 @@ else
 
 		echo "[+] Dns.bufferover.run Over"
 
-	curl -s "https://certspotter.com/api/v0/certs?domain="$1 | jq '.[].dns_names[]' | sed 's/\"//g' | sed 's/\*\.//g' | sort -u | grep $1 >>$1.txt
+	curl -s "https://www.threatcrowd.org/searchApi/v2/domain/report/?domain=$1"|jq .subdomains|grep -o "\w.*$1" >>$1.txt
+		echo "[+] Threatcrowd.org Over"
 
+	curl -s "https://api.hackertarget.com/hostsearch/?q=$1"|grep -o "\w.*$1" >>$1.txt
+        echo "[+] Hackertarget.com Over"
+
+	curl -s "https://certspotter.com/api/v0/certs?domain="$1 | jq '.[].dns_names[]' | sed 's/\"//g' | sed 's/\*\.//g' | sort -u | grep $1 >>$1.txt
 		echo "[+] Certspotter.com Over"
 		echo "[i] Next 3 operations are waiting a bit.(Amass, Subfinder and Findomain)"
 
@@ -36,14 +42,19 @@ else
 
 		echo "[+] Suip.biz Subfinder Over"
 		
-        curl -s -X POST --data "url=$1&only_resolved=1&Submit1=Submit" https://suip.biz/?act=findomain| grep $1 | cut -d ">" -f 2 | awk 'NF' |egrep -v "[[:space:]]"|uniq >> $1.txt
+    curl -s -X POST --data "url=$1&only_resolved=1&Submit1=Submit" https://suip.biz/?act=findomain| grep $1 | cut -d ">" -f 2 | awk 'NF' |egrep -v "[[:space:]]"|uniq >>$1.txt
                 
-	        echo "[+] Suip.biz Findomain Over"
+	    echo "[+] Suip.biz Findomain Over"
 
-	#sort -u $1.txt|cat
-	cat $1.txt|sort|uniq|egrep -v "//|:|,"|tee $1.txt
-	echo "██████████████████████████████████████████████████████████████████████████████████████████████████████"
+	echo "——————————————————————————————————$1 SUBDOMAIN————————————————————————————————————————————"
+	cat $1.txt|sort -u|egrep -v "//|:|,"|tee $1.txt
+	echo "- - - - - - - - - - - - - - - - - $1 ALIVE SUBDOMAIN - - - - - - - - - - - - - - - - - - -"
+    cat $1.txt|httprobe|cut -d "/" -f3|sort -u |tee alive_$1.txt 
+	echo "███████████████████████████████████████████████████████████████████████████████████████████"
 	echo "Detect Subdomain $(wc -l $1.txt|awk '{ print $1 }' )" "=> ${1}"
 	echo "File Location : "$(pwd)/"$1.txt"
+	echo "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓"
+	echo "Detect Alive Subdomain $(wc -l alive_$1.txt|awk '{ print $1 }' )" "=> ${1}"
+	echo "File Location : "$(pwd)/"alive_$1.txt"
 
 fi
