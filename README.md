@@ -2,7 +2,8 @@
 
 ## https://github.com/cihanmehmet/sub.sh
 
-## ‼️ [jq](https://stedolan.github.io/jq/download/) required 📌
+## ‼️ [jq](https://stedolan.github.io/jq/download/) and [httprobe](https://github.com/tomnomnom/httprobe) required 📌
+
 
 ## Linux Install (Debian,Kali Linux,Ubuntu) 
 ```bash
@@ -13,6 +14,15 @@ sudo apt-get install jq
 ```bash
 brew install jq
 ```
+## 📘 ✅Used Services 
+
+#### https://crt.sh
+#### http://web.archive.org
+#### https://dns.bufferover.run
+#### https://www.threatcrowd.org
+#### https://api.hackertarget.com
+#### https://certspotter.com
+#### https://suip.biz
 
 ## USAGE 💡
 
@@ -25,7 +35,7 @@ bash sub.sh webscantest.com
 ```bash
 ./sub.sh webscantest.com
 ```
-![image](https://i.ibb.co/qBKPhHS/script.png)
+![image](https://i.ibb.co/w7rhqbs/sub-sh.png)
 
 ### Curl Usage 🎯
 ```bash
@@ -35,7 +45,7 @@ curl -sL https://raw.githubusercontent.com/cihanmehmet/sub.sh/master/sub.sh | ba
 ```
 curl -sL https://git.io/JesKK | bash -s tesla.com
 ```
-![image](https://i.ibb.co/txtRKfq/online.png)
+![image](https://i.ibb.co/WGPmsBx/curl.png)
 
 - - -
 
