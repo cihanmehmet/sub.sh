@@ -48,7 +48,7 @@ curl -sL https://git.io/JesKK | bash -s tesla.com
 ![image](https://i.ibb.co/WGPmsBx/curl.png)
 
 - - -
-
+# 🧱🔨 Multiprocessing(Parallel) Subdomain Detect 
 ## ‼️ [jq](https://stedolan.github.io/jq/download/) , [httprobe](https://github.com/tomnomnom/httprobe) and [parallel](https://www.gnu.org/software/parallel/parallel_tutorial.html) required 📌
 
 #### Debian Install `apt install parallel`
