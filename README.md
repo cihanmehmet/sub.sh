@@ -49,6 +49,21 @@ curl -sL https://git.io/JesKK | bash -s tesla.com
 
 - - -
 
+## ‼️ [jq](https://stedolan.github.io/jq/download/) , [httprobe](https://github.com/tomnomnom/httprobe) and [parallel](https://www.gnu.org/software/parallel/parallel_tutorial.html) required 📌
+
+#### Debian Install `apt install parallel`
+#### Mac OSX Install `brew install parallel`
+
+```bash
+bash parallel_sub.sh bing.com
+```
+
+```bash
+curl -sL https://git.io/Jebz5|bash -s bing.com
+```
+
+- - -
+
 ### Subdomain Alive Check 🎯
 
 ```bash
