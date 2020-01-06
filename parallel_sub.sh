@@ -60,7 +60,7 @@ export -f 9findomain
 
 	rm crt_$1.txt warchive_$1.txt dnsbuffer_$1.txt threatcrowd_$1.txt hackertarget_$1.txt certspotter_$1.txt amass_$1.txt subfinder_$1.txt findomain_$1.txt
 	
-	cat no_resolve_$1.txt|httprobe|cut -d "/" -f3|sort -u |tee $1.txt 
+	cat no_resolve_$1.txt|httprobe -t 15000 -c 50|cut -d "/" -f3|sort -u |tee $1.txt 
 
 	echo "████████████████████████████████████████████████████████████████████████████████████████████████"
 	echo "Detect Subdomain $(wc -l no_resolve_$1.txt|awk '{ print $1 }' )" "=> ${1}"
