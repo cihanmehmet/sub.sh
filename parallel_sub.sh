@@ -3,13 +3,14 @@
 echo "Online Subdomain Detect Script"
 echo "Twitter => https://twitter.com/cihanmehmets"
 echo "Github => https://github.com/cihanmehmet"
-echo "CURL Subdomain Execute =>"
-echo "curl -sL https://raw.githubusercontent.com/cihanmehmet/sub.sh/master/sub.sh | bash -s bing.com"
+echo "Curl Subdomain Execute =>"
+echo "curl -sL https://raw.githubusercontent.com/cihanmehmet/sub.sh/master/parallel_sub.sh | bash -s bing.com"
+echo "curl -sL https://git.io/Jebz5 | bash -s bing.com"
 echo "████████████████████████████████████████████████████████████████████████████████████████████████"
-#https://l.termbin.com/38y1
 if [[ $# -eq 0 ]] ;
 then
 	echo "Usage: bash sub.sh bing.com"
+	#required => jq,parallel,httprobe 
 	exit 1
 else
 
