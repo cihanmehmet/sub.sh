@@ -49,7 +49,7 @@ else
 	echo "——————————————————————————————————$1 SUBDOMAIN————————————————————————————————————————————"
 	cat $1.txt|sort -u|egrep -v "//|:|,"|tee $1.txt
 	echo "- - - - - - - - - - - - - - - - - $1 ALIVE SUBDOMAIN - - - - - - - - - - - - - - - - - - -"
-    cat $1.txt|httprobe|cut -d "/" -f3|sort -u |tee alive_$1.txt 
+    cat $1.txt|httprobe -t 15000 -c 50|cut -d "/" -f3|sort -u |tee alive_$1.txt 
 	echo "███████████████████████████████████████████████████████████████████████████████████████████"
 	echo "Detect Subdomain $(wc -l $1.txt|awk '{ print $1 }' )" "=> ${1}"
 	echo "File Location : "$(pwd)/"$1.txt"
