@@ -7,6 +7,7 @@ echo "Curl Subdomain Execute =>"
 echo "curl -sL https://raw.githubusercontent.com/cihanmehmet/sub.sh/master/parallel_sub.sh | bash -s bing.com"
 echo "curl -sL https://git.io/Jebz5 | bash -s bing.com"
 echo "████████████████████████████████████████████████████████████████████████████████████████████████"
+#https://termbin.com/rze9
 if [[ $# -eq 0 ]] ;
 then
 	echo "Usage: bash sub.sh bing.com"
