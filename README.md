@@ -166,3 +166,35 @@ echo "File Location : "$(pwd)/"$1.txt"
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 ## :triangular_flag_on_post: 💻 I am open to suggestions for improvement.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+<table>
+  <tr>
+    <th><center>CMD</center></th>
+  </tr>
+  <tr>
+    <td>
+    <p align="center"><img src="https://avatars0.githubusercontent.com/u/7144304?s=400&u=4f09aca07d60b9dc0825aa5d25615cbe3840621d&v=4" alt="Cihan Mehmet DOĞAN" width="200px"/></p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div align="center">
+        <a href="https://www.linkedin.com/in/cihanmehmet/">
+          <img src="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-linkedin.svg" alt="Linkedin" width="40px"/>
+        </a>
+        <a href="https://twitter.com/cihanmehmets">
+          <img src="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-twitter.svg" alt="Twitter" width="40px"/>
+        </a>
+        <a href="https://canyoupwn.me/author/cmd/">
+          <img src="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-web.svg" alt="Website" width="40px"/>
+        </a>
+      </div>
+    </td>
+  </tr>
+</table>
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+## :triangular_flag_on_post: 💻 I am open to suggestions for improvement.
