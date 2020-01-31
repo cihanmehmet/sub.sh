@@ -9,6 +9,8 @@ echo "curl -sL https://git.io/Jebz5 | bash -s bing.com"
 echo "████████████████████████████████████████████████████████████████████████████████████████████████"
 #https://termbin.com/rze9
 
+# sub.sh version 1.0.4
+
 if [[ $# -eq 0 ]] ;
 then
 	echo "Usage: bash sub.sh bing.com"
