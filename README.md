@@ -149,12 +149,11 @@ or
 ### nano ~/.bashrc
 
 ```bash
-function subdomain() { curl -sL https://git.io/JesKK | bash -s $1 
-cat $1.txt|httprobe|cut -d "/" -f3|sort -u |tee $1.txt 
-echo "██████████████████████████████████████████████████████████████████████████████████████████████████████"
-echo "Detect Alive Subdomain $(wc -l $1.txt|awk '{ print $1 }' )" "=> ${1}"
-echo "File Location : "$(pwd)/"$1.txt"
-}
+function subdomain() { curl -sL https://git.io/JesKK | bash -s $1 }
+```
+## 💡 Usage
+```bash
+subdomain webscantest.com
 ```
 <img width="994" alt="subdomain" src="https://user-images.githubusercontent.com/7144304/67149562-143ef100-f29c-11e9-9ba0-1f2db208fd62.png">
 
