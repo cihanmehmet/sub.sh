@@ -8,6 +8,7 @@ echo "curl -sL https://raw.githubusercontent.com/cihanmehmet/sub.sh/master/paral
 echo "curl -sL https://git.io/Jebz5 | bash -s bing.com"
 echo "████████████████████████████████████████████████████████████████████████████████████████████████"
 #https://termbin.com/rze9
+
 if [[ $# -eq 0 ]] ;
 then
 	echo "Usage: bash sub.sh bing.com"
@@ -58,9 +59,11 @@ export -f 9findomain
 	parallel ::: 1crt 2warchive 3dnsbuffer 4threatcrowd 5hackertarget 6certspotter 7amass 8subfinder 9findomain ::: $1
   
 	echo "- - - - - - - - - - - - - - - - - DETECT $1 ALIVE SUBDOMAIN - - - - - - - - - - - - - - - - - -"
-	cat crt_$1.txt warchive_$1.txt dnsbuffer_$1.txt threatcrowd_$1.txt hackertarget_$1.txt certspotter_$1.txt amass_$1.txt subfinder_$1.txt findomain_$1.txt|egrep -v "//|:|," |sort -u > no_resolve_$1.txt
-
+	cat crt_$1.txt warchive_$1.txt dnsbuffer_$1.txt threatcrowd_$1.txt hackertarget_$1.txt certspotter_$1.txt amass_$1.txt subfinder_$1.txt findomain_$1.txt > no_resolve_$1.txt
+	
 	rm crt_$1.txt warchive_$1.txt dnsbuffer_$1.txt threatcrowd_$1.txt hackertarget_$1.txt certspotter_$1.txt amass_$1.txt subfinder_$1.txt findomain_$1.txt
+
+	cat no_resolve_$1.txt|sort -u|egrep -v "//|:|,| |_|@" |grep -o "\w.*$1" > no_resolve_$1.txt
 	
 	cat no_resolve_$1.txt|httprobe -t 15000 -c 50|cut -d "/" -f3|sort -u |tee $1.txt 
 
@@ -69,4 +72,7 @@ export -f 9findomain
 	echo "File Location : "$(pwd)/"no_resolve_$1.txt"
 	echo "Detect Alive Subdomain $(wc -l $1.txt|awk '{ print $1 }' )" "=> ${1}"
 	echo "File Location : "$(pwd)/"$1.txt"
+	
+	#cat $1.txt|python -c "import sys; import json; print (json.dumps({'domains':list(sys.stdin)}))" > $1.json
+        #cat alive_$1.txt|python -c "import sys; import json; print (json.dumps({'domains':list(sys.stdin)}))" >live_$1.json
 fi
