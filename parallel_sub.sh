@@ -61,7 +61,7 @@ else
   	echo "——————————————————————————————————$1 SUBDOMAIN————————————————————————————————————————————"
 	
 
-	cat crt_$1.txt warchive_$1.txt dnsbuffer_$1.txt threatcrowd_$1.txt hackertarget_$1.txt certspotter_$1.txt amass_$1.txt subfinder_$1.txt findomain_$1.txt |sort -u|egrep -v "//|:|,| |_|@" |grep -o "\w.*$1"|tee no_resolve_$1.txt
+	cat crt_$1.txt warchive_$1.txt dnsbuffer_$1.txt threatcrowd_$1.txt hackertarget_$1.txt certspotter_$1.txt amass_$1.txt subfinder_$1.txt findomain_$1.txt |sort -u|egrep -v "//|:|,| |_|\|@" |grep -o "\w.*$1"|tee no_resolve_$1.txt
    
 	
 	echo "- - - - - - - - - - - - - - -  DETECT $1 ALIVE SUBDOMAIN - - - - - - - - - - - - - - - - "
