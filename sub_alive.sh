@@ -39,9 +39,9 @@ else
         curl -s -X POST --data "url=$1&only_resolved=1&Submit1=Submit" https://suip.biz/?act=findomain| grep $1 | cut -d ">" -f 2 | awk 'NF' |egrep -v "[[:space:]]"|uniq >> $1.txt
                 
 	        echo "[+] Suip.biz Findomain Over"
+	
+	cat $1.txt|sort -u|egrep -v "//|:|,| |_|\|@" |grep -o "\w.*$1"|tee $1.txt
 
-	#sort -u $1.txt|cat
-        cat $1.txt|sort -u|egrep -v "//|:|,"|tee $1.txt
 	echo "██████████████████████████████████████████████████████████████████████████████████████████████████████"
 	echo "Detect Subdomain $(wc -l $1.txt|awk '{ print $1 }' )" "=> ${1}"
 	echo "File Location : "$(pwd)/"$1.txt"
