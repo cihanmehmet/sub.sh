@@ -12,7 +12,7 @@ then
 	echo "Usage: bash sub.sh bing.com"
 	exit 1
 else
-	curl -s 'https://crt.sh/?q=%.'$1'&output=json' | jq '.[] | {name_value}' | sed 's/\"//g' | sed 's/\*\.//g' | sort -u |grep "name_value"|cut -d ' ' -f4 > $1.txt
+	curl -s "https://crt.sh/?q=%25."$1"&output=json"| jq -r '.[].name_value' | sed 's/\*\.//g' | sort -u|grep -o "\w.*$1" > $1.txt
 
 		echo "[+] Crt.sh Over"
 
