@@ -47,8 +47,7 @@ else
 	    echo "[+] Suip.biz Findomain Over"
 
 	echo "——————————————————————————————————$1 SUBDOMAIN————————————————————————————————————————————"
-	#cat $1.txt|sort -u|egrep -v "//|:|,"|tee $1.txt
-	cat $1.txt|sort -u|egrep -v "//|:|,| |_|@" |grep -o "\w.*$1"|tee $1.txt
+	cat $1.txt|sort -u|egrep -v "//|:|,| |_|\|@" |grep -o "\w.*$1"|tee $1.txt
 	echo "- - - - - - - - - - - - - - - - - $1 ALIVE SUBDOMAIN - - - - - - - - - - - - - - - - - - -"
         cat $1.txt|httprobe -t 15000 -c 50|cut -d "/" -f3|sort -u |tee alive_$1.txt 
 	echo "███████████████████████████████████████████████████████████████████████████████████████████"
