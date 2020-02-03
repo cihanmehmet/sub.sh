@@ -1,5 +1,7 @@
 # 🎯🕸📘 Online Subdomain Detect Script [![CMD](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 
+## ✨ 🔺Sub.sh but without API key 🔻
+
 ## https://github.com/cihanmehmet/sub.sh
 
 ## ‼️ [jq](https://stedolan.github.io/jq/download/) and [httprobe](https://github.com/tomnomnom/httprobe) required 📌
