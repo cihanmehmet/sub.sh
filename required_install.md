@@ -21,7 +21,7 @@ brew install parallel
 ```bash
 apt install golang
 go get -u github.com/tomnomnom/httprobe
-cp  /root/go/bin/httprobe /usr/local/bin
+cp ~/go/bin/httprobe /usr/local/bin
 ```
 or
 ```bash
