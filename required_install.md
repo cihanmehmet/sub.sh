@@ -25,7 +25,7 @@ cp ~/go/bin/httprobe /usr/local/bin
 ```
 or
 ```bash
-wget https://github.com/tomnomnom/httprobe/releases/download/v0.1.2/httprobe-darwin-amd64-0.1.2.tgz
+wget https://github.com/tomnomnom/httprobe/releases/download/v0.1.2/httprobe-linux-amd64-0.1.2.tgz
 tar -xvzf httprobe-linux-amd64-0.1.2.tgz
 cp httprobe /usr/local/bin
 chmod +x /usr/local/bin/httprobe
