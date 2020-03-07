@@ -17,14 +17,13 @@ sudo apt-get install jq
 brew install jq
 ```
 ## 📘 ✅Used Services 
-
 #### https://crt.sh
 #### http://web.archive.org
 #### https://dns.bufferover.run
 #### https://www.threatcrowd.org
 #### https://api.hackertarget.com
 #### https://certspotter.com
-#### https://suip.biz
+#### [https://suip.biz(Amass,Subfinder,Findomain)](https://suip.biz)
 
 ## USAGE 💡
 
