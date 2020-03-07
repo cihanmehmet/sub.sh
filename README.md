@@ -164,9 +164,6 @@ subdomain webscantest.com
 ### https://github.com/cihanmehmet/sub.sh/issues/4
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-
-## :triangular_flag_on_post: 💻 I am open to suggestions for improvement.
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 <table>
