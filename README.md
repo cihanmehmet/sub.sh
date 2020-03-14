@@ -38,6 +38,11 @@ bash sub.sh webscantest.com
 ```
 ![image](https://i.ibb.co/w7rhqbs/sub-sh.png)
 
+## Demo
+Use this link to test Sub.sh directly in your browser:
+###
+[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/cihanmehmet/sub.sh&tutorial=README.md)
+
 ### Curl Usage 🎯
 ```bash
 curl -sL https://raw.githubusercontent.com/cihanmehmet/sub.sh/master/sub.sh | bash -s webscantest.com
