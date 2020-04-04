@@ -1,9 +1,10 @@
 #!/bin/bash
 
-echo "Online Subdomain Detect Script"
-echo "Twitter => https://twitter.com/cihanmehmets"
-echo "Github => https://github.com/cihanmehmet"
-echo "CURL Subdomain Execute => curl -s -L https://raw.githubusercontent.com/cihanmehmet/sub.sh/master/sub.sh | bash -s bing.com"
+echo "[i] Online Subdomain Detect Script"
+echo "[t] Twitter => https://twitter.com/cihanmehmets"
+echo "[g] Github => https://github.com/cihanmehmet"
+echo "[#] curl -sL https://raw.githubusercontent.com/cihanmehmet/sub.sh/master/sub_alive.sh | bash -s bing.com"
+echo "[#] curl -sL https://git.io/JesKK | bash -s tesla.com"
 echo "████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████"
 
 if [[ $# -eq 0 ]] ;
@@ -28,17 +29,17 @@ else
 		echo "[+] Certspotter.com Over"
 		echo "[i] Next 3 operations are waiting a bit.(Amass, Subfinder and Findomain)"
 
-	curl -s  -X POST --data "url=$1&Submit1=Submit" https://suip.biz/?act=amass | grep $1 | cut -d ">" -f 2 | awk 'NF' | uniq >>$1.txt
+	curl -s  -X POST --data "url=$1&Submit1=Submit" -H 'User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.1) Gecko/20100122 firefox/3.6.1' "https://suip.biz/?act=amass"|grep -o "\w*.$1"| uniq >>$1.txt
 
-		echo "[+] Suip.biz Amass Over"
+	echo "[+] Suip.biz Amass Over"
 
-	curl -s  -X POST --data "url=$1&Submit1=Submit" https://suip.biz/?act=subfinder | grep $1 | cut -d ">" -f 2 | awk 'NF' | uniq >>$1.txt
+	curl -s  -X POST --data "url=$1&Submit1=Submit" -H 'User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.1) Gecko/20100122 firefox/3.6.1' "https://suip.biz/?act=subfinder"|grep -o "\w*.$1"|cut -d ">" -f 2|egrep -v " "| uniq >>$1.txt
+	
+	echo "[+] Suip.biz Subfinder Over"
 
-		echo "[+] Suip.biz Subfinder Over"
-		
-        curl -s -X POST --data "url=$1&only_resolved=1&Submit1=Submit" https://suip.biz/?act=findomain| grep $1 | cut -d ">" -f 2 | awk 'NF' |egrep -v "[[:space:]]"|uniq >> $1.txt
-                
-	        echo "[+] Suip.biz Findomain Over"
+	curl -s -X POST --data "url=$1&Submit1=Submit" -H 'User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.1) Gecko/20100122 firefox/3.6.1' "https://suip.biz/?act=findomain"|grep -o "\w.*$1"|egrep -v " "| uniq >>$1.txt
+	echo "[+] Suip.biz Findomain Over"
+
 	
 	cat $1.txt|sort -u|egrep -v "//|:|,| |_|\|@" |grep -o "\w.*$1"|tee $1.txt
 
