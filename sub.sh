@@ -34,22 +34,22 @@ else
 		echo "[+] Certspotter.com Over"
 		echo "[i] Next 3 operations are waiting a bit.(Amass, Subfinder and Findomain)"
 
-	curl -s  -X POST --data "url=$1&Submit1=Submit" https://suip.biz/?act=amass | grep $1 | cut -d ">" -f 2 | awk 'NF' | uniq >>$1.txt
+	curl -s  -X POST --data "url=$1&Submit1=Submit" -H 'User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.1) Gecko/20100122 firefox/3.6.1' "https://suip.biz/?act=amass"|grep -o "\w*.$1"| uniq >>$1.txt
 
-		echo "[+] Suip.biz Amass Over"
+	echo "[+] Suip.biz Amass Over"
 
-	curl -s  -X POST --data "url=$1&Submit1=Submit" https://suip.biz/?act=subfinder | grep $1 | cut -d ">" -f 2 | awk 'NF' | uniq >>$1.txt
+	curl -s  -X POST --data "url=$1&Submit1=Submit" -H 'User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.1) Gecko/20100122 firefox/3.6.1' "https://suip.biz/?act=subfinder"|grep -o "\w*.$1"|cut -d ">" -f 2|egrep -v " "| uniq >>$1.txt
+	
+	echo "[+] Suip.biz Subfinder Over"
 
-		echo "[+] Suip.biz Subfinder Over"
-		
-    curl -s -X POST --data "url=$1&only_resolved=1&Submit1=Submit" https://suip.biz/?act=findomain| grep $1 | cut -d ">" -f 2 | awk 'NF' |egrep -v "[[:space:]]"|uniq >>$1.txt
-                
-	    echo "[+] Suip.biz Findomain Over"
+	curl -s -X POST --data "url=$1&Submit1=Submit" -H 'User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.1) Gecko/20100122 firefox/3.6.1' "https://suip.biz/?act=findomain"|grep -o "\w.*$1"|egrep -v " "| uniq >>$1.txt
+
+	echo "[+] Suip.biz Findomain Over"
 
 	echo "——————————————————————————————————$1 SUBDOMAIN————————————————————————————————————————————"
 	cat $1.txt|sort -u|egrep -v "//|:|,| |_|\|@" |grep -o "\w.*$1"|tee $1.txt
 	echo "- - - - - - - - - - - - - - - - - $1 ALIVE SUBDOMAIN - - - - - - - - - - - - - - - - - - -"
-        cat $1.txt|httprobe -t 15000 -c 50|cut -d "/" -f3|sort -u |tee alive_$1.txt 
+    cat $1.txt|httprobe -t 15000 -c 50|cut -d "/" -f3|sort -u |tee alive_$1.txt 
 	echo "███████████████████████████████████████████████████████████████████████████████████████████"
 	echo "Detect Subdomain $(wc -l $1.txt|awk '{ print $1 }' )" "=> ${1}"
 	echo "File Location : "$(pwd)/"$1.txt"
@@ -58,6 +58,6 @@ else
 	echo "File Location : "$(pwd)/"alive_$1.txt"
 	
 	#cat $1.txt|python -c "import sys; import json; print (json.dumps({'domains':list(sys.stdin)}))" > $1.json
-        #cat alive_$1.txt|python -c "import sys; import json; print (json.dumps({'domains':list(sys.stdin)}))" >live_$1.json
+    #cat alive_$1.txt|python -c "import sys; import json; print (json.dumps({'domains':list(sys.stdin)}))" >live_$1.json
 
 fi
