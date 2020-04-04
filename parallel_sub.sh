@@ -8,7 +8,6 @@ echo "[#] curl -sL https://git.io/Jebz5 | bash -s bing.com"
 echo "███████████████████████████████████████████████████████████████████████████████████████████████"
 
 # sub.sh version 1.0.4
-# https://termbin.com/ugwv
 if [[ $# -eq 0 ]] ;
 then
 	echo "Usage: bash sub.sh bing.com"
@@ -42,15 +41,15 @@ else
 		echo "[i] Next 3 operations are waiting a bit.(Amass, Subfinder and Findomain)"
 	}
 	function 7amass() {
-		curl -s  -X POST --data "url=$1&Submit1=Submit" https://suip.biz/?act=amass | grep $1 | cut -d ">" -f 2 | awk 'NF' | uniq>amass_$1.txt
+		curl -s  -X POST --data "url=$1&Submit1=Submit" -H 'User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.1) Gecko/20100122 firefox/3.6.1' "https://suip.biz/?act=amass"|grep -o "\w*.$1"| uniq >>amass_$1.txt
 		echo "[+] Suip.biz Amass Over"
 	}
 	function 8subfinder() {
-		curl -s  -X POST --data "url=$1&Submit1=Submit" https://suip.biz/?act=subfinder | grep $1 | cut -d ">" -f 2 | awk 'NF' | uniq >subfinder_$1.txt
+		curl -s  -X POST --data "url=$1&Submit1=Submit" -H 'User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.1) Gecko/20100122 firefox/3.6.1' "https://suip.biz/?act=subfinder"|grep -o "\w*.$1"|cut -d ">" -f 2|egrep -v " "| uniq >>subfinder_$1.txt
 		echo "[+] Suip.biz Subfinder Over"
 	}
 	function 9findomain() {
-		curl -s -X POST --data "url=$1&only_resolved=1&Submit1=Submit" https://suip.biz/?act=findomain| grep $1 | cut -d ">" -f 2 | awk 'NF' |egrep -v "[[:space:]]"|uniq>findomain_$1.txt
+		curl -s -X POST --data "url=$1&Submit1=Submit" -H 'User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.1) Gecko/20100122 firefox/3.6.1' "https://suip.biz/?act=findomain"|grep -o "\w.*$1"|egrep -v " "| uniq >>findomain_$1.txt
 		echo "[+] Suip.biz Findomain Over"
 	}
     
@@ -78,5 +77,5 @@ else
 	echo "File Location : "$(pwd)/"$1.txt"
 	
 	#cat $1.txt|python -c "import sys; import json; print (json.dumps({'domains':list(sys.stdin)}))" > $1.json
-        #cat alive_$1.txt|python -c "import sys; import json; print (json.dumps({'domains':list(sys.stdin)}))" >live_$1.json
+    #cat alive_$1.txt|python -c "import sys; import json; print (json.dumps({'domains':list(sys.stdin)}))" >live_$1.json
 fi
