@@ -24,7 +24,7 @@
 + https://dnsdumpster.com
 + https://rapiddns.io
 [-] Removed service
-- https://suip.biz(Amass,Subfinder,Findomain=
+- https://suip.biz (Amass,Subfinder,Findomain)
 # 🔨 Used Passive Scan Tool
 + Findomain
 + Subfinder
