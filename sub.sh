@@ -3,7 +3,7 @@
 #-Metadata----------------------------------------------------#
 #  Filename: sub.sh (v1.0.21)   (Update: 2020-04-19)          #
 #-Info--------------------------------------------------------#
-# Subdomain Detect Script			     		              #
+# Subdomain Detect Script			     	      #
 #-URL---------------------------------------------------------#
 # https://git.io/JesKK                                        #
 #-------------------------------------------------------------#
@@ -18,7 +18,7 @@ function banner(){
 	echo -e "[t] Twitter => https://twitter.com/cihanmehmets"
 	echo -e "[g] Github => https://github.com/cihanmehme/sub.sh"
 	echo -e "${GREEN}[#] bash sub.sh -s webscantest.com ${RESET}"
-	echo -e "${BLUE}[#] curl -sL https://git.io/JesKK | bash /dev/stdin -m webscantest.com ${RESET}"
+	echo -e "${BLUE}[#] curl -sL https://git.io/JesKK | bash /dev/stdin -a webscantest.com ${RESET}"
 	echo -e "█████████████████████████████████████████████████████████████████"
 }
 #############################################################################################################
