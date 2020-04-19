@@ -258,11 +258,11 @@ args="${1}";
 			echo -e "Usage : "
 			echo -e "  -i | --install   sub.sh required tool install"
 			echo -e "  -s | --small     Crt, Warchive, Dnsbuffer, Threatcrowd, Hackertarget, Certspotter, Abubis-DB, Virustotal,Alienvault, Urlscan, Threatminer, entrust, Riddler, Dnsdumpster Rapiddns"
-			echo -e "  -m | --all      Crt, Web-Archive, Dnsbuffer, Threatcrowd, Hackertarget, Certspotter, Anubisdb, Virustotal, Alienvault, Urlscan, Threatminer,  Entrust, Riddler, Dnsdumpster, Findomain, Subfinder, Amass, Assetfinder, Rapiddns"
+			echo -e "  -a | --all       Crt, Web-Archive, Dnsbuffer, Threatcrowd, Hackertarget, Certspotter, Anubisdb, Virustotal, Alienvault, Urlscan, Threatminer,  Entrust, Riddler, Dnsdumpster, Findomain, Subfinder, Amass, Assetfinder, Rapiddns"
 			echo -e "  bash sub.sh -s testfire.net"
-			echo -e "  bash sub.sh -m testfire.net"
-			echo -e "  curl -sL https://git.io/JesKK | bash /dev/stdin -m webscantest.com"
+			echo -e "  bash sub.sh -a testfire.net"
 			echo -e "  curl -sL https://git.io/JesKK | bash /dev/stdin -s webscantest.com"
+			echo -e "  curl -sL https://git.io/JesKK | bash /dev/stdin -a webscantest.com"
 			echo -e "  bash sub.sh -h/-help"				
 			exit 1
 			;;
