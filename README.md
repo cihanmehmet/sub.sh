@@ -44,7 +44,7 @@ curl -sL https://git.io/JesKK | bash /dev/stdin -s webscantest.com
 ```bash
 ./sub.sh -a webscantest.com
 ```
-![image](https://i.imgur.com/vSz7IAJ.png)
+![image](https://i.imgur.com/FuIh0wQ.png)
 
 ##  🔸 Required tool automatic install
 ```bash
