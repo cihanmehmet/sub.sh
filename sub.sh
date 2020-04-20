@@ -1,9 +1,9 @@
 #!/bin/bash
 
 #-Metadata----------------------------------------------------#
-#  Filename: sub.sh (v1.0.21)   (Update: 2020-04-19)          #
+#  Filename: sub.sh (v1.0.21)   (Update: 2020-04-20)          #
 #-Info--------------------------------------------------------#
-# Subdomain Detect Script			     	      #
+# Subdomain Detect Script			     	     			  #
 #-URL---------------------------------------------------------#
 # https://git.io/JesKK                                        #
 #-------------------------------------------------------------#
@@ -124,36 +124,58 @@ function commonToolInstall(){
 	      echo -e "${BLUE}[!] Subfinder already exists \n${RESET}"
 	else 
 		go get -u -v github.com/projectdiscovery/subfinder/cmd/subfinder
-		echo -e "${RED}[!] reckdns installed \n${RESET}"
+		echo -e "${RED}[!] Subfinder installed \n${RESET}"
 	fi
 
 	if [ -e ~/go/bin/assetfinder ] || [ -e /usr/local/bin/assetfinder ] || [ -e ~/go-workspace/bin/assetfinder ] || [ -e ~/gopath/bin/assetfinder ] ; then
-	    echo -e "${BLUE}[!] goaltdns already exists \n${RESET}"
+	    echo -e "${BLUE}[!] Assetfinder already exists \n${RESET}"
 	   
 	else 
 		go get -u github.com/tomnomnom/assetfinder
-		echo -e "${RED}[!] goaltdns installed \n${RESET}"
+		echo -e "${RED}[!] Assetfinder installed \n${RESET}"
 	fi
 
-	if [ -e ~/usr/local/bin/findomain ] ; then
-	    echo -e "${BLUE}[!] goaltdns already exists \n${RESET}"
+	if [ -e /usr/local/bin/findomain ] ; then
+	   
+	   echo -e "${BLUE}[!] Findomain already exists \n${RESET}"
 	   
 	else 
 	    case "$(uname -a)" in
 	        *Debian*|*Ubuntu*|*Linux*|*Fedora*)
-	            installDebian;
-	            ;;
-	        *Darwin*)
-	            brew install findomain
+	         	wget https://github.com/Edu4rdSHL/findomain/releases/latest/download/findomain-linux
+				sudo chmod +x findomain-linux
+				sudo mv findomain-linux /usr/local/bin
+				echo -e "${RED}[!] Findomain installed \n${RESET}"
 	            ;;
 	        *)
-	            echo "Unable to detect an operating system that is compatible with Sub.sh...";
+	            echo "OS Not Linux";
 	            ;;
 	    esac
-		wget https://github.com/Edu4rdSHL/findomain/releases/latest/download/findomain-linux
-		sudo chmod +x findomain-linux
-		sudo mv findomain-linux /usr/local/bin
-		echo -e "${RED}[!] goaltdns installed \n${RESET}"
+
+	fi
+
+	if [ -e /usr/bin/amass ] || [ -e /usr/local/bin/amass ] || [ -e ~/go/bin/amass ] ||  [ -e ~/go-workspace/bin/amass ] || [ -e ~/gopath/bin/amass ] ; then
+	   
+	   echo -e "${BLUE}[!] Amass already exists \n${RESET}"
+	   
+	else 
+	    case "$(uname -a)" in
+	        *Fedora*)
+				
+				wget https://github.com/OWASP/Amass/releases/download/v3.5.5/amass_v3.5.5_linux_amd64.zip -O /tmp/amass.zip
+				unzip /tmp/amass.zip
+				sudo mv /tmp/amass_v3.5.5_linux_amd64/amass /usr/local/bin/amass
+				sudo chmod +x /usr/local/bin/amass
+				rm -rf /tmp/amass_v3.5.5_linux_amd64/ amass.zip
+				echo -e "${RED}[!] Amass installed \n${RESET}"
+				#git clone https://github.com/OWASP/Amass.git
+				#go get -v -u github.com/OWASP/Amass/v3/...
+	            ;;
+	        *)
+	            echo "OS Not Fedora";
+	            ;;
+	    esac
+
 	fi
 
 }
@@ -162,22 +184,25 @@ function installDebian(){ #Kali and Parrot Os
     sudo apt-get update -y
     sudo apt list --upgradable
 	sudo apt install jq parallel amass -y
+	echo -e "${RED}[!] Debian Tool Installed \n${RESET}"
 	commonToolInstall;
 	source ~/.bashrc ~/.zshrc;
 }
 function installOSX(){
 	brew update
-	brew install jq parallel
+	brew install jq parallel findomain
 	brew tap caffix/amass
 	brew install amass
+	echo -e "${GREEN}[!] MAC-OSX Tool Installed \n${RESET}"
 	commonToolInstall
 	brew cleanup
 	source ~/.bashrc ~/.zshrc;
 }
 function installFedora(){
     sudo yum -y update
-    sudo yum install jq parallel
+    sudo yum install jq parallel;
 	commonToolInstall
+
 	source ~/.bashrc ~/.zshrc;
 }
 
