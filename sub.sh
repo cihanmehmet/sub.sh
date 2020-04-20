@@ -238,7 +238,7 @@ args="${1}";
 			parallel ::: 1crt 2warchive 3dnsbuffer 4threatcrowd 5hackertarget 6certspotter 7anubisdb 8virustotal 9alienvault 10urlscan 11threatminer 12entrust 13riddler 14dnsdumpster 15findomain 16subfinder 17amass 18assetfinder 19rapiddns ::: $2	
 
 			echo "———————————————————————— $2 SUBDOMAIN—————————————————————————————————"
-			cat crt_$2.txt warchive_$2.txt dnsbuffer_$2.txt threatcrowd_$2.txt hackertarget_$2.txt certspotter_$2.txt anubisdb_$2.txt virustotal_$2.txt alienvault_$2.txt urlscan_$2.txt threatminer_$2.txt entrust_$2.txt riddler_$2.txt dnsdumper_$2.txt findomain_$2.txt subfinder_$2.txt amass_$2.txt assetfinder_$2.txt rapiddns_$2.txt | sort -u|egrep -v "//|:|,| |_|\|@" |grep -o "\w.*$2"|tee no_resolve_$2.txt
+			cat crt_$2.txt warchive_$2.txt dnsbuffer_$2.txt threatcrowd_$2.txt hackertarget_$2.txt certspotter_$2.txt anubisdb_$2.txt virustotal_$2.txt alienvault_$2.txt urlscan_$2.txt threatminer_$2.txt entrust_$2.txt riddler_$2.txt dnsdumper_$2.txt findomain_$2.txt subfinder_$2.txt amass_$2.txt assetfinder_$2.txt rapiddns_$2.txt | sort -u| grep -v "@" | egrep -v "//|:|,| |_|\|/"|grep -o "\w.*$2"|tee no_resolve_$2.txt
 
 			echo "- - - - - - - - - - - - - $2 ALIVE SUBDOMAIN - - - - - - - - - - - - -"
 			
