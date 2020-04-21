@@ -34,21 +34,35 @@
 ### Script Usage 🎯
 
 ### Small Scan
-```bash
+```powershell
 ./sub.sh -s webscantest.com
 ```
-```bash
+```powershell
 curl -sL https://git.io/JesKK | bash /dev/stdin -s webscantest.com
 ```
 ### All Scan
-```bash
+```powershell
 ./sub.sh -a webscantest.com
 ```
 ![image](https://i.imgur.com/FuIh0wQ.png)
 
 ##  🔸 Required tool automatic install
-```bash
+```powershell
 ./sub.sh -i
+```
+### If you already have a GO, you should make the following settings;
+```powershell
+nano ~/.bashrc or  nano ~/.zshrc             
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+source ~/.bashrc source ~/.zshrc
+```
+### The following tools working with go language have been installed.
+```powershell
+go get -u github.com/tomnomnom/httprobe
+go get -u github.com/projectdiscovery/subfinder/cmd/subfinder
+go get -u github.com/tomnomnom/assetfinder
+go get -v -u github.com/OWASP/Amass/v3/...
 ```
 ## Demo
 Use this link to test Sub.sh directly in your browser:
@@ -61,11 +75,11 @@ Use this link to test Sub.sh directly in your browser:
 or
 ### nano ~/.bashrc
 
-```bash
+```powershell
 function subdomain() { curl -sL https://git.io/JesKK | bash /dev/stdin "$1" "$2" }
 ```
 ## 💡 Usage
-```bash
+```powershell
 subdomain webscantest.com
 ```
 ![image](https://i.imgur.com/L2sufiT.png)
