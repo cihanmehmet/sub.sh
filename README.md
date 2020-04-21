@@ -55,7 +55,9 @@ curl -sL https://git.io/JesKK | bash /dev/stdin -s webscantest.com
 nano ~/.bashrc or  nano ~/.zshrc             
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-source ~/.bashrc source ~/.zshrc
+```
+```powershell
+source ~/.bashrc ; source ~/.zshrc
 ```
 ### The following tools working with go language have been installed.
 ```powershell
