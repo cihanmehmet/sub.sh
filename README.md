@@ -71,11 +71,6 @@ subdomain webscantest.com
 ![image](https://i.imgur.com/L2sufiT.png)
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-
-## 🧵 Docker Usage
-### https://github.com/cihanmehmet/sub.sh/issues/4
-
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 <table>
