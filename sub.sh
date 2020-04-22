@@ -106,7 +106,7 @@ function 18assetfinder() {
 	echo "[+] Assetfinder Over => $(wc -l  assetfinder_$1.txt|awk '{ print $1}')"
 }
 function 19rapiddns() {
-	curl -s "http://rapiddns.io/subdomain/$1#" | grep -oaEi "https?://[^\"\\'> ]+" | grep $1 | cut -d "/" -f3 | sort -u >rapiddns_$1.txt
+	curl -s "https://rapiddns.io/subdomain/$1" | grep -oaEi "https?://[^\"\\'> ]+" | grep $1 | cut -d "/" -f3 | sort -u >rapiddns_$1.txt
 	echo "[+] Rapiddns Over => $(wc -l rapiddns_$1.txt|awk '{ print $1}')"
 }
 #############################################################################################################
