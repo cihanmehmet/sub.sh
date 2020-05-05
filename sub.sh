@@ -183,10 +183,12 @@ function commonToolInstall(){
 function installDebian(){ #Kali and Parrot Os
     sudo apt-get update -y
     sudo apt list --upgradable
-	sudo apt install jq parallel amass -y
-	echo -e "${RED}[!] Debian Tool Installed \n${RESET}"
-	commonToolInstall;
-	source ~/.bashrc ~/.zshrc;
+    sudo apt install jq amass -y;
+    sudo apt install parallel -y;
+    echo -e "${RED}[!] Debian Tool Installed \n${RESET}"
+    commonToolInstall;
+    echo -e "${BLUE}[!] Common Tool Installed \n${RESET}"
+    source ~/.bashrc ~/.zshrc;
 }
 function installOSX(){
 	brew update
