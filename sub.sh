@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #-Metadata----------------------------------------------------#
-#  Filename: sub.sh (v1.0.21)   (Update: 2020-04-20)          #
+#  Filename: sub.sh (v1.0.21)   (Update: 2020-05-05)          #
 #-Info--------------------------------------------------------#
 # Subdomain Detect Script			     	     			  #
 #-URL---------------------------------------------------------#
@@ -192,9 +192,10 @@ function installDebian(){ #Kali and Parrot Os
 }
 function installOSX(){
 	brew update
-	brew install jq parallel findomain
+	brew install jq findomain
 	brew tap caffix/amass
 	brew install amass
+	brew install parallel
 	echo -e "${GREEN}[!] MAC-OSX Tool Installed \n${RESET}"
 	commonToolInstall
 	brew cleanup
@@ -202,7 +203,8 @@ function installOSX(){
 }
 function installFedora(){
     sudo yum -y update
-    sudo yum install jq parallel;
+    sudo yum install jq;
+    sudo yum install parallel;
 	commonToolInstall
 
 	source ~/.bashrc ~/.zshrc;
@@ -237,7 +239,6 @@ function subsave(){
 	echo -e "[*] Detect Alive Subdomain $(wc -l $1.txt|awk '{ print $1 }' )" "=> ${1}"
 	echo -e "[+] File Location : "$(pwd)/"$1.txt"
 	echo -e "${RED}[H] Httprobe File Location : "$(pwd)/"httprobe_$1.txt ${RESET}"
-
 }
 #############################################################################################################
 while [[ "${#}" -gt 0  ]]; do
