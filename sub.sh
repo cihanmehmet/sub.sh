@@ -144,7 +144,7 @@ function commonToolInstall(){
 	        *Debian*|*Ubuntu*|*Linux*|*Fedora*)
 	         	wget https://github.com/Edu4rdSHL/findomain/releases/latest/download/findomain-linux
 				sudo chmod +x findomain-linux
-				sudo mv findomain-linux /usr/local/bin
+				sudo mv findomain-linux /usr/local/bin/findomain
 				echo -e "${RED}[!] Findomain installed \n${RESET}"
 	            ;;
 	        *)
