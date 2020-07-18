@@ -114,6 +114,8 @@ subdomain webscantest.com
     </td>
   </tr>
 </table>
-
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 ## :triangular_flag_on_post: 💻 I am open to suggestions for improvement.
+
+## Twitter:
+<p align="center"><a href="https://twitter.com/cihanmehmets" target="_blank"><img src="https://img.shields.io/twitter/follow/cihanmehmets.svg?logo=twitter"></a></p>
