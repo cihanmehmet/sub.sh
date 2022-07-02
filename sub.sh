@@ -3,7 +3,7 @@
 #-Metadata----------------------------------------------------#
 #  Filename: sub.sh (v1.0.21)   (Update: 2020-05-05)          #
 #-Info--------------------------------------------------------#
-# Subdomain Detect Script			     	     			  #
+# Subdomain Detect Script			     	      #
 #-URL---------------------------------------------------------#
 # https://git.io/JesKK                                        #
 #-------------------------------------------------------------#
@@ -14,12 +14,12 @@ RED="\033[1;31m"
 RESET="\033[0m"
 
 function banner(){
-	echo -e "${RED}[i] Subdomain Detect Script ${RESET}"
-	echo -e "[t] Twitter => https://twitter.com/cihanmehmets"
-	echo -e "[g] Github => https://github.com/cihanmehme/sub.sh"
-	echo -e "${GREEN}[#] bash sub.sh -s webscantest.com ${RESET}"
-	echo -e "${BLUE}[#] curl -sL https://git.io/JesKK | bash /dev/stdin -a webscantest.com ${RESET}"
-	echo -e "█████████████████████████████████████████████████████████████████"
+	echo -e "${RED}[i] Subdomain reconnaissance and enumeration script ${RESET}"
+	echo -e "[t] Author: => https://twitter.com/cihanmehmets"
+	echo -e "[g] Author: => https://github.com/cihanmehme/sub.sh"
+	echo -e "${GREEN}[#] Usage: ./sub.sh -s example.com ${RESET}"
+	echo -e "${BLUE}[#] Usage: curl -sL https://git.io/JesKK | bash /dev/stdin -a example.com ${RESET}"
+	echo -e "-------------------------------------------------------------------------"
 }
 #############################################################################################################
 function 1crt(){
@@ -114,32 +114,28 @@ function commonToolInstall(){
 
 	if [ -e ~/go/bin/httprobe ] || [ -e /usr/local/bin/httprobe ] || [ -e ~/go-workspace/bin/httprobe ] || [ -e ~/gopath/bin/httprobe ] ; then
 	      echo -e "${BLUE}[!] httprobe already exists \n${RESET}"
-	else 
-		go get -u github.com/tomnomnom/httprobe
-  
+	else
+		go install github.com/tomnomnom/httprobe@latest
 		echo -e "${RED}[!] httprobe installed \n${RESET}"
 	fi
 
 	if [ -e ~/go/bin/subfinder ] || [ -e /usr/local/bin/subfinder ] || [ -e ~/go-workspace/bin/subfinder ] || [ -e ~/gopath/bin/subfinder ] ; then
 	      echo -e "${BLUE}[!] Subfinder already exists \n${RESET}"
 	else 
-		go get -u -v github.com/projectdiscovery/subfinder/cmd/subfinder
+		go install github.com/projectdiscovery/subfinder/cmd/subfinder@latest
 		echo -e "${RED}[!] Subfinder installed \n${RESET}"
 	fi
 
 	if [ -e ~/go/bin/assetfinder ] || [ -e /usr/local/bin/assetfinder ] || [ -e ~/go-workspace/bin/assetfinder ] || [ -e ~/gopath/bin/assetfinder ] ; then
 	    echo -e "${BLUE}[!] Assetfinder already exists \n${RESET}"
-	   
-	else 
-		go get -u github.com/tomnomnom/assetfinder
+	else
+		go install github.com/tomnomnom/assetfinder@latest
 		echo -e "${RED}[!] Assetfinder installed \n${RESET}"
 	fi
 
 	if [ -e /usr/local/bin/findomain ] ; then
-	   
 	   echo -e "${BLUE}[!] Findomain already exists \n${RESET}"
-	   
-	else 
+	else
 	    case "$(uname -a)" in
 	        *Debian*|*Ubuntu*|*Linux*|*Fedora*)
 	         	wget https://github.com/Edu4rdSHL/findomain/releases/latest/download/findomain-linux
@@ -155,13 +151,10 @@ function commonToolInstall(){
 	fi
 
 	if [ -e /usr/bin/amass ] || [ -e /usr/local/bin/amass ] || [ -e ~/go/bin/amass ] ||  [ -e ~/go-workspace/bin/amass ] || [ -e ~/gopath/bin/amass ] ; then
-	   
 	   echo -e "${BLUE}[!] Amass already exists \n${RESET}"
-	   
-	else 
+	else
 	    case "$(uname -a)" in
 	        *Fedora*)
-				
 				wget https://github.com/OWASP/Amass/releases/download/v3.5.5/amass_v3.5.5_linux_amd64.zip -O /tmp/amass.zip
 				unzip /tmp/amass.zip
 				sudo mv /tmp/amass_v3.5.5_linux_amd64/amass /usr/local/bin/amass
