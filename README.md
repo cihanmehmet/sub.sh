@@ -1,12 +1,9 @@
-# 🎯🕸📘 Multiprocessing(Parallel)Subdomain Detect Script [![CMD](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
+# Multiprocessing (Parallel) Subdomain Detection Script 
+Forked from  https://github.com/cihanmehmet/sub.sh
 
-## ✨ 🔺Sub.sh but without API key 🔻
+[jq](https://stedolan.github.io/jq/download/)  and [parallel](https://www.gnu.org/software/parallel/parallel_tutorial.html) required
 
-## https://github.com/cihanmehmet/sub.sh
-
-## ‼️ [jq](https://stedolan.github.io/jq/download/) , [httprobe](https://github.com/tomnomnom/httprobe) and [parallel](https://www.gnu.org/software/parallel/parallel_tutorial.html) required 📌
-
-## 📘 ✅ Used Services 
+## Used Services 
 ```diff
 + https://crt.sh
 + http://web.archive.org
@@ -30,22 +27,20 @@
 + Subfinder
 + Assetfinder
 ```
-## 💢 USAGE 💡
-### Script Usage 🎯
+## USAGE
+### Script Usage
 
 ### Small Scan
 ```powershell
-./sub.sh -s webscantest.com
+./sub.sh -s example.com
 ```
 ```powershell
-curl -sL https://git.io/JesKK | bash /dev/stdin -s webscantest.com
+curl -sL bit.ly/3bUdFHv | bash /dev/stdin -s example.com
 ```
 ### All Scan
 ```powershell
-./sub.sh -a webscantest.com
+./sub.sh -a example.com
 ```
-![image](https://i.imgur.com/FuIh0wQ.png)
-
 ##  🔸 Required tool automatic install
 ```powershell
 ./sub.sh -i
@@ -72,51 +67,15 @@ Use this link to test Sub.sh directly in your browser:
 [![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/cihanmehmet/sub.sh&tutorial=README.md)
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-## 🔑 📜 Subdomain Detect Terminal Shortcut Function
+## Subdomain Detect Terminal Shortcut Function
 ### nano ~/.zshrc
 or
 ### nano ~/.bashrc
 
 ```powershell
-function subdomain() { curl -sL https://git.io/JesKK | bash /dev/stdin "$1" "$2" }
+function subdomain() { curl -sL bit.ly/3bUdFHv | bash /dev/stdin "$1" "$2" }
 ```
 ## 💡 Usage
 ```powershell
-subdomain webscantest.com
+subdomain example.com
 ```
-![image](https://i.imgur.com/L2sufiT.png)
-
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-
-<table>
-  <tr>
-    <th><center>CMD</center></th>
-  </tr>
-  <tr>
-    <td>
-    <p align="center"><img src="https://avatars0.githubusercontent.com/u/7144304?s=400&u=4f09aca07d60b9dc0825aa5d25615cbe3840621d&v=4" alt="Cihan Mehmet DOĞAN" width="200px"/></p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <div align="center">
-        <a href="https://www.linkedin.com/in/cihanmehmet/">
-          <img src="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-linkedin.svg" alt="Linkedin" width="40px"/>
-        </a>
-        <a href="https://twitter.com/cihanmehmets">
-          <img src="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-twitter.svg" alt="Twitter" width="40px"/>
-        </a>
-        <a href="https://canyoupwn.me/author/cmd/">
-          <img src="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-web.svg" alt="Website" width="40px"/>
-        </a>
-      </div>
-    </td>
-  </tr>
-</table>
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-
-## :triangular_flag_on_post: 💻 I am open to suggestions for improvement.
-
-## Twitter:
-<p align="center"><a href="https://twitter.com/cihanmehmets" target="_blank"><img src="https://img.shields.io/twitter/follow/cihanmehmets.svg?logo=twitter"></a></p>

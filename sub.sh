@@ -2,23 +2,29 @@
 
 #-Metadata----------------------------------------------------#
 #  Filename: sub.sh (v1.0.21)   (Update: 2020-05-05)          #
+#  Updated by https://github.com/enseitankado/ (2022-07)      #
 #-Info--------------------------------------------------------#
 # Subdomain Detect Script			     	      #
 #-URL---------------------------------------------------------#
 # https://git.io/JesKK                                        #
+# https://github.com/enseitankado/sub.sh                      #
 #-------------------------------------------------------------#
 
 GREEN="\033[1;32m"
 BLUE="\033[1;36m"
 RED="\033[1;31m"
+WHITE="\033[1;97m"
 RESET="\033[0m"
 
+
 function banner(){
-	echo -e "${RED}[i] Subdomain reconnaissance and enumeration script ${RESET}"
-	echo -e "[t] Author: => https://twitter.com/cihanmehmets"
-	echo -e "[g] Author: => https://github.com/cihanmehme/sub.sh"
+	echo -e "${WHITE}[i] Subdomain reconnaissance and enumeration script started for ${1} ${RESET}"
+	echo -e "[t] Original Author: => https://twitter.com/cihanmehmets"
+	echo -e "[g] Original Author: => https://github.com/cihanmehme/sub.sh"
+	echo -e "[t] Updated by https://twitter.com/OzgurKoca2"
+	echo -e "[g] Fixed version at https://github.com/enseitankado/sub.sh"
 	echo -e "${GREEN}[#] Usage: ./sub.sh -s example.com ${RESET}"
-	echo -e "${BLUE}[#] Usage: curl -sL https://git.io/JesKK | bash /dev/stdin -a example.com ${RESET}"
+	echo -e "${BLUE}[#] Usage: curl -sL https://bit.ly/3bUdFHv | bash /dev/stdin -a example.com ${RESET}"
 	echo -e "-------------------------------------------------------------------------"
 }
 #############################################################################################################
@@ -109,7 +115,9 @@ function 19rapiddns() {
 	curl -s "https://rapiddns.io/subdomain/$1?full=1#result" | grep -oaEi "https?://[^\"\\'> ]+" | grep $1 | cut -d "/" -f3 | sort -u >rapiddns_$1.txt
 	echo "[+] Rapiddns Over => $(wc -l rapiddns_$1.txt|awk '{ print $1}')"
 }
+
 #############################################################################################################
+
 function commonToolInstall(){
 
 	if [ -e ~/go/bin/httprobe ] || [ -e /usr/local/bin/httprobe ] || [ -e ~/go-workspace/bin/httprobe ] || [ -e ~/gopath/bin/httprobe ] ; then
@@ -139,9 +147,9 @@ function commonToolInstall(){
 	    case "$(uname -a)" in
 	        *Debian*|*Ubuntu*|*Linux*|*Fedora*)
 	         	wget https://github.com/Edu4rdSHL/findomain/releases/latest/download/findomain-linux
-				sudo chmod +x findomain-linux
-				sudo mv findomain-linux /usr/local/bin/findomain
-				echo -e "${RED}[!] Findomain installed \n${RESET}"
+			sudo chmod +x findomain-linux
+			sudo mv findomain-linux /usr/local/bin/findomain
+			echo -e "${RED}[!] Findomain installed \n${RESET}"
 	            ;;
 	        *)
 	            echo "OS Not Linux";
@@ -155,14 +163,14 @@ function commonToolInstall(){
 	else
 	    case "$(uname -a)" in
 	        *Fedora*)
-				wget https://github.com/OWASP/Amass/releases/download/v3.5.5/amass_v3.5.5_linux_amd64.zip -O /tmp/amass.zip
-				unzip /tmp/amass.zip
-				sudo mv /tmp/amass_v3.5.5_linux_amd64/amass /usr/local/bin/amass
-				sudo chmod +x /usr/local/bin/amass
-				rm -rf /tmp/amass_v3.5.5_linux_amd64/ amass.zip
-				echo -e "${RED}[!] Amass installed \n${RESET}"
-				#git clone https://github.com/OWASP/Amass.git
-				#go get -v -u github.com/OWASP/Amass/v3/...
+			wget https://github.com/OWASP/Amass/releases/download/v3.5.5/amass_v3.5.5_linux_amd64.zip -O /tmp/amass.zip
+			unzip /tmp/amass.zip
+			sudo mv /tmp/amass_v3.5.5_linux_amd64/amass /usr/local/bin/amass
+			sudo chmod +x /usr/local/bin/amass
+			rm -rf /tmp/amass_v3.5.5_linux_amd64/ amass.zip
+			echo -e "${RED}[!] Amass installed \n${RESET}"
+			#git clone https://github.com/OWASP/Amass.git
+			#go get -v -u github.com/OWASP/Amass/v3/...
 	            ;;
 	        *)
 	            echo "OS Not Fedora";
@@ -223,15 +231,37 @@ function install(){
 }
 #############################################################################################################
 function subsave(){
-	cat no_resolve_$1.txt|httprobe -c 50 > httprobe_$1.txt
-	cat httprobe_$1.txt|cut -d "/" -f3|sort -u|tee $1.txt
-	#-----------------------------------------------------------------------------------
-	echo -e "█████████████████████████████████████████████████████████████████"
-	echo -e "[*] Detect Subdomain $(wc -l no_resolve_$1.txt|awk '{ print $1}' )" "=> ${1}"
-	echo -e "[+] File Location : "$(pwd)/"no_resolve_$1.txt"
-	echo -e "[*] Detect Alive Subdomain $(wc -l $1.txt|awk '{ print $1 }' )" "=> ${1}"
-	echo -e "[+] File Location : "$(pwd)/"$1.txt"
-	echo -e "${RED}[H] Httprobe File Location : "$(pwd)/"httprobe_$1.txt ${RESET}"
+
+	rm -rf $1.txt
+	for i in `cat all_$1.txt`
+	do
+		# Checking for the resolved IP address from the end of the command output. Refer
+		# the normal command output of nslookup to understand why.
+		resolvedIP=$(nslookup $i | awk -F':' '/^Address: / { matched = 1 } matched { print $2}' | xargs)
+
+		# Deciding the lookup status by checking the variable has a valid IP string
+		! [[ -z "$resolvedIP" ]] && echo echo $i >> $1.txt
+	done
+	echo -e ""
+	echo -e "-------------------------------------------------------------------------"
+
+
+	allCount=$(wc -l all_$1.txt|awk '{ print $1}')
+	if [ $allCount -ne 0 ]; then
+		echo -e "[*] Detected ${WHITE}#${allCount}${RESET} subdomains for ${1}"
+		echo -e "[+] Saved to "$(pwd)/"all_$1.txt"
+	else
+	        echo -e "[*] Not detected any subdomains for ${1}"
+		rm -rf $(pwd)/"all_$1.txt"
+	fi
+
+
+	if [[ -f $1.txt ]]; then
+		validCount=$(wc -l $1.txt|awk '{ print $1 }')
+		echo -e ""
+		echo -e "[*] Detected ${WHITE}#${validCount}${RESET} live subdomains for ${1}"
+		echo -e "[+] Saved to "$(pwd)/"$1.txt"
+	fi
 }
 #############################################################################################################
 while [[ "${#}" -gt 0  ]]; do
@@ -239,30 +269,27 @@ args="${1}";
   	case "$( echo ${args} | tr '[:upper:]' '[:lower:]' )" in
 
 		-s|--speed|--small)
-			banner
+			banner $2
 			export -f 1crt  && export -f 2warchive && export -f 3dnsbuffer  && export -f 4threatcrowd  && export -f 5hackertarget  && export -f 6certspotter && export -f 7anubisdb && export -f 8virustotal && export -f 9alienvault && export -f 10urlscan && export -f 11threatminer && export -f 12entrust && export -f 13riddler && export -f 14dnsdumpster && export -f 19rapiddns
 
-			parallel ::: 1crt 2warchive 3dnsbuffer 4threatcrowd 5hackertarget 6certspotter 7anubisdb 8virustotal 9alienvault 10urlscan 11threatminer 12entrust 13riddler 14dnsdumpster 19rapiddns ::: $2	
-			
-			echo "———————————————————————— $2 SUBDOMAIN—————————————————————————————————"
-			cat crt_$2.txt warchive_$2.txt dnsbuffer_$2.txt threatcrowd_$2.txt hackertarget_$2.txt certspotter_$2.txt anubisdb_$2.txt virustotal_$2.txt alienvault_$2.txt urlscan_$2.txt threatminer_$2.txt entrust_$2.txt riddler_$2.txt dnsdumper_$2.txt rapiddns_$2.txt | sort -u | grep -v "@" | egrep -v "//|:|,| |_|\|/"|grep -o "\w.*$2"|tee no_resolve_$2.txt
-			echo "- - - - - - - - - - - - - $2 ALIVE SUBDOMAIN - - - - - - - - - - - - -"
+			parallel ::: 1crt 2warchive 3dnsbuffer 4threatcrowd 5hackertarget 6certspotter 7anubisdb 8virustotal 9alienvault 10urlscan 11threatminer 12entrust 13riddler 14dnsdumpster 19rapiddns ::: $2
+
+			echo -e ""
+			cat crt_$2.txt warchive_$2.txt dnsbuffer_$2.txt threatcrowd_$2.txt hackertarget_$2.txt certspotter_$2.txt anubisdb_$2.txt virustotal_$2.txt alienvault_$2.txt urlscan_$2.txt threatminer_$2.txt entrust_$2.txt riddler_$2.txt dnsdumper_$2.txt rapiddns_$2.txt | sort -u | grep -v "@" | egrep -v "//|:|,| |_|\|/"|grep -o "\w.*$2"|tee all_$2.txt
 			rm crt_$2.txt warchive_$2.txt dnsbuffer_$2.txt threatcrowd_$2.txt hackertarget_$2.txt certspotter_$2.txt anubisdb_$2.txt virustotal_$2.txt alienvault_$2.txt urlscan_$2.txt threatminer_$2.txt entrust_$2.txt riddler_$2.txt dnsdumper_$2.txt rapiddns_$2.txt
+
 			subsave $2
 			shift
 			;;
 
 		-a|--all)
-			banner
+			banner $2
 			export -f 1crt  && export -f 2warchive && export -f 3dnsbuffer  && export -f 4threatcrowd  && export -f 5hackertarget  && export -f 6certspotter && export -f 7anubisdb && export -f 8virustotal && export -f 9alienvault && export -f 10urlscan && export -f 11threatminer && export -f 12entrust && export -f 13riddler && export -f 14dnsdumpster && export -f 15findomain && export -f 16subfinder && export -f 17amass && export -f 18assetfinder && export -f 19rapiddns 
 
 			parallel ::: 1crt 2warchive 3dnsbuffer 4threatcrowd 5hackertarget 6certspotter 7anubisdb 8virustotal 9alienvault 10urlscan 11threatminer 12entrust 13riddler 14dnsdumpster 15findomain 16subfinder 17amass 18assetfinder 19rapiddns ::: $2	
 
-			echo "———————————————————————— $2 SUBDOMAIN—————————————————————————————————"
-			cat crt_$2.txt warchive_$2.txt dnsbuffer_$2.txt threatcrowd_$2.txt hackertarget_$2.txt certspotter_$2.txt anubisdb_$2.txt virustotal_$2.txt alienvault_$2.txt urlscan_$2.txt threatminer_$2.txt entrust_$2.txt riddler_$2.txt dnsdumper_$2.txt findomain_$2.txt subfinder_$2.txt amass_$2.txt assetfinder_$2.txt rapiddns_$2.txt | sort -u| grep -v "@" | egrep -v "//|:|,| |_|\|/"|grep -o "\w.*$2"|tee no_resolve_$2.txt
-
-			echo "- - - - - - - - - - - - - $2 ALIVE SUBDOMAIN - - - - - - - - - - - - -"
-			
+			echo -e ""
+			cat crt_$2.txt warchive_$2.txt dnsbuffer_$2.txt threatcrowd_$2.txt hackertarget_$2.txt certspotter_$2.txt anubisdb_$2.txt virustotal_$2.txt alienvault_$2.txt urlscan_$2.txt threatminer_$2.txt entrust_$2.txt riddler_$2.txt dnsdumper_$2.txt findomain_$2.txt subfinder_$2.txt amass_$2.txt assetfinder_$2.txt rapiddns_$2.txt | sort -u| grep -v "@" | egrep -v "//|:|,| |_|\|/"|grep -o "\w.*$2"|tee all_$2.txt
 			rm crt_$2.txt warchive_$2.txt dnsbuffer_$2.txt threatcrowd_$2.txt hackertarget_$2.txt certspotter_$2.txt anubisdb_$2.txt virustotal_$2.txt alienvault_$2.txt urlscan_$2.txt threatminer_$2.txt entrust_$2.txt riddler_$2.txt dnsdumper_$2.txt findomain_$2.txt subfinder_$2.txt amass_$2.txt assetfinder_$2.txt rapiddns_$2.txt
 
 			subsave $2
@@ -277,62 +304,16 @@ args="${1}";
 
 		-h|--help|*)
 			echo -e "Usage : "
-			echo -e "  -i | --install   sub.sh required tool install"
+			echo -e "  -i | --install   installs required tools"
 			echo -e "  -s | --small     Crt, Warchive, Dnsbuffer, Threatcrowd, Hackertarget, Certspotter, Abubis-DB, Virustotal,Alienvault, Urlscan, Threatminer, entrust, Riddler, Dnsdumpster Rapiddns"
 			echo -e "  -a | --all       Crt, Web-Archive, Dnsbuffer, Threatcrowd, Hackertarget, Certspotter, Anubisdb, Virustotal, Alienvault, Urlscan, Threatminer,  Entrust, Riddler, Dnsdumpster, Findomain, Subfinder, Amass, Assetfinder, Rapiddns"
-			echo -e "  bash sub.sh -s testfire.net"
-			echo -e "  bash sub.sh -a testfire.net"
-			echo -e "  curl -sL https://git.io/JesKK | bash /dev/stdin -s webscantest.com"
-			echo -e "  curl -sL https://git.io/JesKK | bash /dev/stdin -a webscantest.com"
-			echo -e "  bash sub.sh -h/-help"				
+			echo -e "  bash sub.sh -s example.com"
+			echo -e "  bash sub.sh -a example.com"
+			echo -e "  curl -sL https://bit.ly/3bUdFHv | bash /dev/stdin -s example.com"
+			echo -e "  curl -sL https://bit.ly/3bUdFHv | bash /dev/stdin -a example.com"
+			echo -e "  bash sub.sh -h/-help"
 			exit 1
 			;;
 	esac
 	shift
 done
-
-# #Function Tree
-# banner
-## #Subdomain Data Function Name
-# 1crt
-# 2warchive
-# 3dnsbuffer
-# 4threatcrowd
-# 5hackertarget
-# 6certspotter
-# 7anubisdb
-# 8virustotal
-# 9alienvault
-# 10urlscan
-# 11threatminer
-# 12entrust
-# 13riddler
-# 14dnsdumpster
-# 15findomain
-# 16subfinder
-# 17amass
-# 18assetfinder
-# 19rapiddns
-######################
-# commonToolInstall
-# installDebian
-# installOSX
-# installFedora
-# install
-# subsave
-
-# https://crt.sh
-# http://web.archive.org
-# https://dns.bufferover.run
-# https://www.threatcrowd.org
-# https://api.hackertarget.com
-# https://certspotter.com
-# https://jldc.me/
-# https://www.virustotal.com
-# https://otx.alienvault.com
-# https://urlscan.io
-# https://api.threatminer.org
-# https://ctsearch.entrust.com
-# https://riddler.io
-# https://dnsdumpster.com
-# http://rapiddns.io/
