@@ -1,13 +1,13 @@
 # Multithreaded Subdomain Detection Script 
-Forked from  https://github.com/cihanmehmet/sub.sh
-Required tools: jq,parallel,wget,goLang,amass,findomain,subfinder and assetfinder
+ Forked from  https://github.com/cihanmehmet/sub.sh
 
-# UPDATES MADE by ME
+ Required tools: jq,parallel,wget,goLang,amass,findomain,subfinder and assetfinder
 
-* httprobe tool avoided. Used name servers for verifying subdomains ınstead of checking 80/443. 
-* Some ogical improvements to file and output to screen.
-* From Go version 1.18 'go get' command will no longer install the packages. Make use of 'go install' instead.
+# UPDATES
 
+* Used name servers for verifying subdomains ınstead of checking 80/443 (httprobe avoided).
+* Some ortopedical improvements about outputs (file and screen).
+* Updated depricated install method of go.
 
 ## Used Services 
 ```diff
@@ -26,21 +26,20 @@ Required tools: jq,parallel,wget,goLang,amass,findomain,subfinder and assetfinde
 + https://riddler.io
 + https://dnsdumpster.com
 + https://rapiddns.io
-## Used Passive/Active Scan Tool
 + Amass
 + Findomain
 + Subfinder
 + Assetfinder
 ```
 ## USAGES
-### Script usage: Small Scan
+### Script usage: Small scan
 ```powershell
 ./sub.sh -s example.com
 ```
 ```powershell
 curl -sL bit.ly/3bUdFHv | bash /dev/stdin -s example.com
 ```
-### Script usage: All Scan
+### Script usage: All scan
 ```powershell
 ./sub.sh -a example.com
 ```
@@ -65,7 +64,7 @@ go get -u github.com/tomnomnom/assetfinder
 go get -v -u github.com/OWASP/Amass/v3/...
 ```
 ## Demo
-Use this link to test Sub.sh directly in your browser:
+Use this link to test sub.sh directly in your browser. Now:
 ###
 [![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/enseitankado/sub.sh&tutorial=README.md)
 
@@ -78,7 +77,7 @@ or
 ```powershell
 function subdomain() { curl -sL bit.ly/3bUdFHv | bash /dev/stdin "$1" "$2" }
 ```
-## 💡 Usage
+## Usage
 ```powershell
 subdomain example.com
 ```
