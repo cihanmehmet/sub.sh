@@ -1,4 +1,4 @@
-# Multithreaded Subdomain Detection Script 
+# Multithreaded subdomain enumeration script 
  Forked from  https://github.com/cihanmehmet/sub.sh
 
  Required tools: jq,parallel,wget,goLang,amass,findomain,subfinder and assetfinder
