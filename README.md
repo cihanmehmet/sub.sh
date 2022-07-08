@@ -1,7 +1,13 @@
-# Multiprocessing (Parallel) Subdomain Detection Script 
+# Multithreaded Subdomain Detection Script 
 Forked from  https://github.com/cihanmehmet/sub.sh
+Required tools: jq,parallel,wget,goLang,amass,findomain,subfinder and assetfinder
 
-[jq](https://stedolan.github.io/jq/download/)  and [parallel](https://www.gnu.org/software/parallel/parallel_tutorial.html) required
+# UPDATES MADE by ME
+
+* httprobe tool avoided. Used name servers for verifying subdomains ınstead of checking 80/443. 
+* Some ogical improvements to file and output to screen.
+* From Go version 1.18 'go get' command will no longer install the packages. Make use of 'go install' instead.
+
 
 ## Used Services 
 ```diff
@@ -20,24 +26,21 @@ Forked from  https://github.com/cihanmehmet/sub.sh
 + https://riddler.io
 + https://dnsdumpster.com
 + https://rapiddns.io
-[-] Removed service
-- https://suip.biz (Amass,Subfinder,Findomain)
-# 🔨 Used Passive Scan Tool
+## Used Passive/Active Scan Tool
++ Amass
 + Findomain
 + Subfinder
 + Assetfinder
 ```
-## USAGE
-### Script Usage
-
-### Small Scan
+## USAGES
+### Script usage: Small Scan
 ```powershell
 ./sub.sh -s example.com
 ```
 ```powershell
 curl -sL bit.ly/3bUdFHv | bash /dev/stdin -s example.com
 ```
-### All Scan
+### Script usage: All Scan
 ```powershell
 ./sub.sh -a example.com
 ```
@@ -64,10 +67,10 @@ go get -v -u github.com/OWASP/Amass/v3/...
 ## Demo
 Use this link to test Sub.sh directly in your browser:
 ###
-[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/cihanmehmet/sub.sh&tutorial=README.md)
+[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/enseitankado/sub.sh&tutorial=README.md)
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-## Subdomain Detect Terminal Shortcut Function
+## Subdomain detection terminal shortcut function
 ### nano ~/.zshrc
 or
 ### nano ~/.bashrc
