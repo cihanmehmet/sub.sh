@@ -1,5 +1,0 @@
-ftp.oyunkampta.com
-mail.oyunkampta.com
-ns1.oyunkampta.com
-ns2.oyunkampta.com
-www.oyunkampta.com
