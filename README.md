@@ -8,6 +8,7 @@
 * Used name servers for verifying subdomains ınstead of checking 80/443 (httprobe avoided).
 * Some ortopedical improvements about outputs (file and screen).
 * Updated depricated install method of go.
+* Amass runs in passive mode in short scan (-s) otherwise runs in active brute mode.
 
 ## Used Services 
 ```diff

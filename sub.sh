@@ -103,10 +103,15 @@ function 16subfinder() {
 	subfinder -silent -d $1 -o subfinder_$1.txt &>/dev/null
 	echo "[+] Subfinder Over => $(wc -l subfinder_$1.txt|awk '{ print $1}')"
 }
-function 17amass() {
+function 17amass_passive() {
 	amass enum -passive -norecursive -noalts -d $1 -o amass_$1.txt &>/dev/null
 	echo "[+] Amass Over => $(wc -l amass_$1.txt|awk '{ print $1}')"
 }
+function 17amass_active_brute() {
+	amass enum -brute -min-for-recursive 2 -d $1 -o amass_$1.txt &>/dev/null
+	echo "[+] Amass Over => $(wc -l amass_$1.txt|awk '{ print $1}')"
+}
+
 function 18assetfinder() {
 	assetfinder --subs-only $1 > assetfinder_$1.txt
 	echo "[+] Assetfinder Over => $(wc -l  assetfinder_$1.txt|awk '{ print $1}')"
@@ -232,6 +237,9 @@ function install(){
 #############################################################################################################
 function subsave(){
 
+
+	echo -e "Validating NS records..."
+	echo -e ""
 	rm -rf $1.txt
 	for i in `cat all_$1.txt`
 	do
@@ -240,7 +248,7 @@ function subsave(){
 		resolvedIP=$(nslookup $i | awk -F':' '/^Address: / { matched = 1 } matched { print $2}' | xargs)
 
 		# Deciding the lookup status by checking the variable has a valid IP string
-		! [[ -z "$resolvedIP" ]] && echo echo $i >> $1.txt
+		! [[ -z "$resolvedIP" ]] && echo $i >> $1.txt
 	done
 	echo -e ""
 	echo -e "-------------------------------------------------------------------------"
@@ -259,7 +267,7 @@ function subsave(){
 	if [[ -f $1.txt ]]; then
 		validCount=$(wc -l $1.txt|awk '{ print $1 }')
 		echo -e ""
-		echo -e "[*] Detected ${WHITE}#${validCount}${RESET} live subdomains for ${1}"
+		echo -e "[*] Verified ${WHITE}#${validCount}${RESET} subdomains as live for ${1}"
 		echo -e "[+] Saved to "$(pwd)/"$1.txt"
 	fi
 }
@@ -270,13 +278,13 @@ args="${1}";
 
 		-s|--speed|--small)
 			banner $2
-			export -f 1crt  && export -f 2warchive && export -f 3dnsbuffer  && export -f 4threatcrowd  && export -f 5hackertarget  && export -f 6certspotter && export -f 7anubisdb && export -f 8virustotal && export -f 9alienvault && export -f 10urlscan && export -f 11threatminer && export -f 12entrust && export -f 13riddler && export -f 14dnsdumpster && export -f 19rapiddns
+			export -f 1crt  && export -f 2warchive && export -f 3dnsbuffer  && export -f 4threatcrowd  && export -f 5hackertarget  && export -f 6certspotter && export -f 7anubisdb && export -f 8virustotal && export -f 9alienvault && export -f 10urlscan && export -f 11threatminer && export -f 12entrust && export -f 13riddler && export -f 14dnsdumpster && export -f 17amass_passive && export -f 19rapiddns
 
-			parallel ::: 1crt 2warchive 3dnsbuffer 4threatcrowd 5hackertarget 6certspotter 7anubisdb 8virustotal 9alienvault 10urlscan 11threatminer 12entrust 13riddler 14dnsdumpster 19rapiddns ::: $2
+			parallel ::: 1crt 2warchive 3dnsbuffer 4threatcrowd 5hackertarget 6certspotter 7anubisdb 8virustotal 9alienvault 10urlscan 11threatminer 12entrust 13riddler 14dnsdumpster 17amass_passive 19rapiddns ::: $2
 
 			echo -e ""
-			cat crt_$2.txt warchive_$2.txt dnsbuffer_$2.txt threatcrowd_$2.txt hackertarget_$2.txt certspotter_$2.txt anubisdb_$2.txt virustotal_$2.txt alienvault_$2.txt urlscan_$2.txt threatminer_$2.txt entrust_$2.txt riddler_$2.txt dnsdumper_$2.txt rapiddns_$2.txt | sort -u | grep -v "@" | egrep -v "//|:|,| |_|\|/"|grep -o "\w.*$2"|tee all_$2.txt
-			rm crt_$2.txt warchive_$2.txt dnsbuffer_$2.txt threatcrowd_$2.txt hackertarget_$2.txt certspotter_$2.txt anubisdb_$2.txt virustotal_$2.txt alienvault_$2.txt urlscan_$2.txt threatminer_$2.txt entrust_$2.txt riddler_$2.txt dnsdumper_$2.txt rapiddns_$2.txt
+			cat crt_$2.txt warchive_$2.txt dnsbuffer_$2.txt threatcrowd_$2.txt hackertarget_$2.txt certspotter_$2.txt anubisdb_$2.txt virustotal_$2.txt alienvault_$2.txt urlscan_$2.txt threatminer_$2.txt entrust_$2.txt riddler_$2.txt dnsdumper_$2.txt amass_$2.txt rapiddns_$2.txt | sort -u | grep -v "@" | egrep -v "//|:|,| |_|\|/"|grep -o "\w.*$2"|tee all_$2.txt
+			rm crt_$2.txt warchive_$2.txt dnsbuffer_$2.txt threatcrowd_$2.txt hackertarget_$2.txt certspotter_$2.txt anubisdb_$2.txt virustotal_$2.txt alienvault_$2.txt urlscan_$2.txt threatminer_$2.txt entrust_$2.txt riddler_$2.txt dnsdumper_$2.txt amass_$2.txt rapiddns_$2.txt
 
 			subsave $2
 			shift
@@ -284,9 +292,9 @@ args="${1}";
 
 		-a|--all)
 			banner $2
-			export -f 1crt  && export -f 2warchive && export -f 3dnsbuffer  && export -f 4threatcrowd  && export -f 5hackertarget  && export -f 6certspotter && export -f 7anubisdb && export -f 8virustotal && export -f 9alienvault && export -f 10urlscan && export -f 11threatminer && export -f 12entrust && export -f 13riddler && export -f 14dnsdumpster && export -f 15findomain && export -f 16subfinder && export -f 17amass && export -f 18assetfinder && export -f 19rapiddns 
+			export -f 1crt  && export -f 2warchive && export -f 3dnsbuffer  && export -f 4threatcrowd  && export -f 5hackertarget  && export -f 6certspotter && export -f 7anubisdb && export -f 8virustotal && export -f 9alienvault && export -f 10urlscan && export -f 11threatminer && export -f 12entrust && export -f 13riddler && export -f 14dnsdumpster && export -f 15findomain && export -f 16subfinder && export -f 17amass_active_brute && export -f 18assetfinder && export -f 19rapiddns 
 
-			parallel ::: 1crt 2warchive 3dnsbuffer 4threatcrowd 5hackertarget 6certspotter 7anubisdb 8virustotal 9alienvault 10urlscan 11threatminer 12entrust 13riddler 14dnsdumpster 15findomain 16subfinder 17amass 18assetfinder 19rapiddns ::: $2	
+			parallel ::: 1crt 2warchive 3dnsbuffer 4threatcrowd 5hackertarget 6certspotter 7anubisdb 8virustotal 9alienvault 10urlscan 11threatminer 12entrust 13riddler 14dnsdumpster 15findomain 16subfinder 17amass_active_brute 18assetfinder 19rapiddns ::: $2	
 
 			echo -e ""
 			cat crt_$2.txt warchive_$2.txt dnsbuffer_$2.txt threatcrowd_$2.txt hackertarget_$2.txt certspotter_$2.txt anubisdb_$2.txt virustotal_$2.txt alienvault_$2.txt urlscan_$2.txt threatminer_$2.txt entrust_$2.txt riddler_$2.txt dnsdumper_$2.txt findomain_$2.txt subfinder_$2.txt amass_$2.txt assetfinder_$2.txt rapiddns_$2.txt | sort -u| grep -v "@" | egrep -v "//|:|,| |_|\|/"|grep -o "\w.*$2"|tee all_$2.txt
