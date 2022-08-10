@@ -18,12 +18,22 @@ RESET="\033[0m"
 
 
 function banner(){
+	echo -e ""
+	echo -e "${BLUE}:'######:::::'##::::'##::::'########::::::::::::::'######:::::'##::::'##:${RESET}"
+	echo -e "${BLUE}'##... ##:::: ##:::: ##:::: ##.... ##::::::::::::'##... ##:::: ##:::: ##:${RESET}"
+	echo -e "${BLUE} ##:::..::::: ##:::: ##:::: ##:::: ##:::::::::::: ##:::..::::: ##:::: ##:${RESET}"
+	echo -e "${BLUE}. ######::::: ##:::: ##:::: ########:::::::::::::. ######::::: #########:${RESET}"
+	echo -e "${BLUE}:..... ##:::: ##:::: ##:::: ##.... ##:::::::::::::..... ##:::: ##.... ##:${RESET}"
+	echo -e "${BLUE}'##::: ##:::: ##:::: ##:::: ##:::: ##::::'###::::'##::: ##:::: ##:::: ##:${RESET}"
+	echo -e "${BLUE}. ######:::::. #######::::: ########::::: ###::::. ######::::: ##:::: ##:${RESET}"
+	echo -e "${BLUE}:......:::::::.......::::::........::::::...::::::......::::::..:::::..::${RESET}"
+	echo -e ""
 	echo -e "${WHITE}[i] Subdomain reconnaissance and enumeration script started for ${1} ${RESET}"
 	echo -e "[t] Original Author: => https://twitter.com/cihanmehmets"
 	echo -e "[g] Original Author: => https://github.com/cihanmehme/sub.sh"
 	echo -e "[t] Updated by https://twitter.com/OzgurKoca2"
 	echo -e "[g] Fixed version at https://github.com/enseitankado/sub.sh"
-	echo -e "${GREEN}[#] Usage: ./sub.sh -s example.com ${RESET}"
+	echo -e "${GREEN}[#] Usage: ./sub.sh -h ${RESET}"
 	echo -e "${BLUE}[#] Usage: curl -sL https://bit.ly/3bUdFHv | bash /dev/stdin -a example.com ${RESET}"
 	echo -e "-------------------------------------------------------------------------"
 }
@@ -125,13 +135,6 @@ function 19rapiddns() {
 
 function commonToolInstall(){
 
-	if [ -e ~/go/bin/httprobe ] || [ -e /usr/local/bin/httprobe ] || [ -e ~/go-workspace/bin/httprobe ] || [ -e ~/gopath/bin/httprobe ] ; then
-	      echo -e "${BLUE}[!] httprobe already exists \n${RESET}"
-	else
-		go install github.com/tomnomnom/httprobe@latest
-		echo -e "${RED}[!] httprobe installed \n${RESET}"
-	fi
-
 	if [ -e ~/go/bin/subfinder ] || [ -e /usr/local/bin/subfinder ] || [ -e ~/go-workspace/bin/subfinder ] || [ -e ~/gopath/bin/subfinder ] ; then
 	      echo -e "${BLUE}[!] Subfinder already exists \n${RESET}"
 	else 
@@ -232,13 +235,13 @@ function install(){
             ;;
     esac
     echo "  "
-    echo "[+] Installation Complete jq,parallel,httprobe,amass,findomain,assetfinder";
+    echo "[+] Installation Complete jq,parallel,amass,findomain,assetfinder";
 }
 #############################################################################################################
 function subsave(){
 
-
-	echo -e "Validating NS records..."
+	echo -e ""
+	echo -e "${WHITE}Validating NS records...${RESET}"
 	echo -e ""
 	rm -rf $1.txt
 	for i in `cat all_$1.txt`
@@ -256,7 +259,7 @@ function subsave(){
 
 	allCount=$(wc -l all_$1.txt|awk '{ print $1}')
 	if [ $allCount -ne 0 ]; then
-		echo -e "[*] Detected ${WHITE}#${allCount}${RESET} subdomains for ${1}"
+		echo -e "[*] ${WHITE}#${allCount}${RESET} subdomains detected for ${1}"
 		echo -e "[+] Saved to "$(pwd)/"all_$1.txt"
 	else
 	        echo -e "[*] Not detected any subdomains for ${1}"
@@ -267,7 +270,7 @@ function subsave(){
 	if [[ -f $1.txt ]]; then
 		validCount=$(wc -l $1.txt|awk '{ print $1 }')
 		echo -e ""
-		echo -e "[*] Verified ${WHITE}#${validCount}${RESET} subdomains as live for ${1}"
+		echo -e "[*] ${WHITE}#${validCount}${RESET} subdomains verified live for ${1}"
 		echo -e "[+] Saved to "$(pwd)/"$1.txt"
 	fi
 }
