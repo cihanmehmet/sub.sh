@@ -1,5 +1,6 @@
 # Multithreaded subdomain enumeration script 
  Forked from  https://github.com/cihanmehmet/sub.sh
+a
 
  Required tools: jq,parallel,wget,goLang,amass,findomain,subfinder and assetfinder
 
@@ -40,11 +41,11 @@
 ```powershell
 curl -sL bit.ly/3bUdFHv | bash /dev/stdin -s example.com
 ```
-### Script usage: All scan
+### Script usage: Complete scan
 ```powershell
 ./sub.sh -a example.com
 ```
-##  🔸 Required tool automatic install
+## Automatic install of required tools
 ```powershell
 ./sub.sh -i
 ```
