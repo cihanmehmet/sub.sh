@@ -1,6 +1,5 @@
 # Multithreaded subdomain enumeration script 
  Forked from  https://github.com/cihanmehmet/sub.sh
-a
 
  Required tools: jq,parallel,wget,goLang,amass,findomain,subfinder and assetfinder
 
