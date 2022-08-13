@@ -21,7 +21,6 @@
 + https://api.hackertarget.com
 + https://certspotter.com
 + https://jldc.me/
-+ https://www.virustotal.com
 + https://otx.alienvault.com
 + https://urlscan.io
 + https://api.threatminer.org
