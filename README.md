@@ -12,8 +12,8 @@
 * VirusTotal removed because of CAPTCHA protection
 * CertSpotter API service updated
 
-## Used Services 
-```diff
+## Used Services & Tools
+```
 + https://crt.sh
 + http://web.archive.org
 + https://dns.bufferover.run
