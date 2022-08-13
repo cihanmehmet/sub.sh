@@ -1,0 +1,3 @@
+mail.robottr.com.tr
+webmail.robottr.com.tr
+www.robottr.com.tr

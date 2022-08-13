@@ -3,12 +3,14 @@
 
  Required tools: jq,parallel,wget,goLang,amass,findomain,subfinder and assetfinder
 
-# UPDATES
+# Updates that I made
 
 * Used name servers for verifying subdomains ınstead of checking 80/443 (httprobe avoided).
 * Some ortopedical improvements about outputs (file and screen).
 * Updated depricated install method of go.
 * Amass runs in passive mode in short scan (-s) otherwise runs in active brute mode.
+* VirusTotal removed because of CAPTCHA protection
+* CertSpotter API service updated
 
 ## Used Services 
 ```diff
@@ -59,7 +61,6 @@ source ~/.bashrc ; source ~/.zshrc
 ```
 ### The following tools working with go language have been installed.
 ```powershell
-go get -u github.com/tomnomnom/httprobe
 go get -u github.com/projectdiscovery/subfinder/cmd/subfinder
 go get -u github.com/tomnomnom/assetfinder
 go get -v -u github.com/OWASP/Amass/v3/...

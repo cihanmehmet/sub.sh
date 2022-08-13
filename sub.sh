@@ -40,61 +40,64 @@ function banner(){
 #############################################################################################################
 function 1crt(){
 	curl -s "https://crt.sh/?q=%25.$1&output=json"| jq -r '.[].name_value' 2>/dev/null | sed 's/\*\.//g' | sort -u | grep -o "\w.*$1" > crt_$1.txt
-	echo -e "[+] Crt.sh Over => $(wc -l crt_$1.txt|awk '{ print $1}')"
+	echo -e "[+] Querying Crt.sh => $(wc -l crt_$1.txt|awk '{ print $1}')"
 }
 function 2warchive(){
 	curl -s "http://web.archive.org/cdx/search/cdx?url=*.$1/*&output=text&fl=original&collapse=urlkey" | sort | sed -e 's_https*://__' -e "s/\/.*//" -e 's/:.*//' -e 's/^www\.//' |sort -u > warchive_$1.txt
-	echo "[+] Web.Archive.org Over => $(wc -l warchive_$1.txt|awk '{ print $1}')"
+	echo "[+] Querying Web.Archive.org => $(wc -l warchive_$1.txt|awk '{ print $1}')"
 }
 function 3dnsbuffer(){
 	curl -s "https://dns.bufferover.run/dns?q=.$1" | jq -r .FDNS_A[] 2>/dev/null | cut -d ',' -f2 | grep -o "\w.*$1" | sort -u > dnsbuffer_$1.txt
 	curl -s "https://dns.bufferover.run/dns?q=.$1" | jq -r .RDNS[] 2>/dev/null | cut -d ',' -f2 | grep -o "\w.*$1" | sort -u >> dnsbuffer_$1.txt 
 	curl -s "https://tls.bufferover.run/dns?q=.$1" | jq -r .Results 2>/dev/null | cut -d ',' -f3 |grep -o "\w.*$1"| sort -u >> dnsbuffer_$1.txt 
 	sort -u dnsbuffer_$1.txt -o dnsbuffer_$1.txt
-	echo "[+] Dns.bufferover.run Over => $(wc -l dnsbuffer_$1.txt|awk '{ print $1}')"
+	echo "[+] Querying Dns.bufferover.run => $(wc -l dnsbuffer_$1.txt|awk '{ print $1}')"
 }
 function 4threatcrowd(){
 	curl -s "https://www.threatcrowd.org/searchApi/v2/domain/report/?domain=$1"|jq -r '.subdomains' 2>/dev/null |grep -o "\w.*$1" > threatcrowd_$1.txt
-	echo "[+] Threatcrowd.org Over => $(wc -l threatcrowd_$1.txt|awk '{ print $1}')"
+	echo "[+] Querying Threatcrowd.org => $(wc -l threatcrowd_$1.txt|awk '{ print $1}')"
 }
 function 5hackertarget(){
 	curl -s "https://api.hackertarget.com/hostsearch/?q=$1"|grep -o "\w.*$1"> hackertarget_$1.txt
-    echo "[+] Hackertarget.com Over => $(wc -l hackertarget_$1.txt | awk '{ print $1}')"
+    echo "[+] Querying Hackertarget.com => $(wc -l hackertarget_$1.txt | awk '{ print $1}')"
 }
 function 6certspotter(){
-	curl -s "https://certspotter.com/api/v0/certs?domain=$1" | jq -r '.[].dns_names[]' 2>/dev/null | grep -o "\w.*$1" | sort -u > certspotter_$1.txt
-	echo "[+] Certspotter.com Over => $(wc -l certspotter_$1.txt | awk '{ print $1}')"
+	curl -s "https://api.certspotter.com/v1/issuances?domain=$1&include_subdomains=true&expand=dns_names" | jq -r '.[].dns_names[]' 2>/dev/null | grep -o "\w.*$1" | sort -u > certspotter_$1.txt
+	echo "[+] Querying Certspotter.com => $(wc -l certspotter_$1.txt | awk '{ print $1}')"
 }
 function 7anubisdb(){
-		curl -s "https://jldc.me/anubis/subdomains/$1" | jq -r '.' 2>/dev/null | grep -o "\w.*$1" > anubisdb_$1.txt
- 		echo "[+] Anubis-DB(jonlu.ca) Over => $(wc -l anubisdb_$1.txt|awk '{ print $1}')"
+	curl -s "https://jldc.me/anubis/subdomains/$1" | jq -r '.' 2>/dev/null | grep -o "\w.*$1" > anubisdb_$1.txt
+	echo "[+] Querying Anubis-DB(jonlu.ca) => $(wc -l anubisdb_$1.txt|awk '{ print $1}')"
 }
 function 8virustotal(){
-		curl -s "https://www.virustotal.com/ui/domains/$1/subdomains?limit=40"|jq -r '.' 2>/dev/null |grep id|grep -o "\w.*$1"|cut -d '"' -f3|egrep -v " " > virustotal_$1.txt
- 		echo "[+] Virustotal Over => $(wc -l virustotal_$1.txt|awk '{ print $1}')"
+
+# Removed at 13.8.22 because of CAPTCHA protection
+
+#	curl -s "https://www.virustotal.com/ui/domains/$1/subdomains?limit=40"|jq -r '.' 2>/dev/null |grep id|grep -o "\w.*$1"|cut -d '"' -f3|egrep -v " " > virustotal_$1.txt
+#	echo "[+] Querying VirusTotal => $(wc -l virustotal_$1.txt|awk '{ print $1}')"
 }
 function 9alienvault(){
-		curl -s "https://otx.alienvault.com/api/v1/indicators/domain/$1/passive_dns"|jq '.passive_dns[].hostname' 2>/dev/null |grep -o "\w.*$1"|sort -u > alienvault_$1.txt
- 		echo "[+] Alienvault(otx) Over => $(wc -l alienvault_$1.txt|awk '{ print $1}')"
+	curl -s "https://otx.alienvault.com/api/v1/indicators/domain/$1/passive_dns"|jq '.passive_dns[].hostname' 2>/dev/null |grep -o "\w.*$1"|sort -u > alienvault_$1.txt
+	echo "[+] Querying Alienvault(otx) => $(wc -l alienvault_$1.txt|awk '{ print $1}')"
 }
 function 10urlscan(){
 	curl -s "https://urlscan.io/api/v1/search/?q=domain:$1"|jq '.results[].page.domain' 2>/dev/null |grep -o "\w.*$1"|sort -u > urlscan_$1.txt
-	echo "[+] Urlscan.io Over => $(wc -l urlscan_$1.txt|awk '{ print $1}')"
+	echo "[+] Querying Urlscan.io => $(wc -l urlscan_$1.txt|awk '{ print $1}')"
 }
 
 function 11threatminer(){
 	curl -s "https://api.threatminer.org/v2/domain.php?q=$1&rt=5" | jq -r '.results[]' 2>/dev/null |grep -o "\w.*$1"|sort -u > threatminer_$1.txt
-	echo "[+] Threatminer Over => $(wc -l threatminer_$1.txt|awk '{ print $1}')"
+	echo "[+] Querying Threatminer => $(wc -l threatminer_$1.txt|awk '{ print $1}')"
 }
 function 12entrust(){
 	 curl -s "https://ctsearch.entrust.com/api/v1/certificates?fields=subjectDN&domain=$1&includeExpired=false&exactMatch=false&limit=5000" | jq -r '.[].subjectDN' 2>/dev/null |sed 's/cn=//g'|grep -o "\w.*$1"|sort -u > entrust_$1.txt
-	echo "[+] Entrust.com Over => $(wc -l entrust_$1.txt|awk '{ print $1}')"
+	echo "[+] Querying Entrust.com => $(wc -l entrust_$1.txt|awk '{ print $1}')"
 }
 
 function 13riddler() {
     curl -s "https://riddler.io/search/exportcsv?q=pld:$1"| grep -o "\w.*$1"|awk -F, '{print $6}'|sort -u > riddler_$1.txt
 	#curl -s "https://riddler.io/search/exportcsv?q=pld:$1"|cut -d "," -f6|grep $1|sort -u >riddler_$1.txt
-	echo "[+] Riddler.io Over => $(wc -l riddler_$1.txt|awk '{ print $1}')"
+	echo "[+] Querying Riddler.io => $(wc -l riddler_$1.txt|awk '{ print $1}')"
 }
 
 function 14dnsdumpster() {
@@ -103,32 +106,32 @@ function 14dnsdumpster() {
 
 	cat dnsdumpster.html|grep "https://api.hackertarget.com/httpheaders"|grep -o "\w.*$1"|cut -d "/" -f7|sort -u > dnsdumper_$1.txt
 	rm dnsdumpster.html
-	echo "[+] Dnsdumpster Over => $(wc -l dnsdumper_$1.txt|awk '{ print $1}')"
+	echo "[+] Querying Dnsdumpster => $(wc -l dnsdumper_$1.txt|awk '{ print $1}')"
 }
 function 15findomain() {
-    findomain -t $1 -u findomain_$1.txt &>/dev/null
-	echo "[+] Findomain Over => $(wc -l findomain_$1.txt | awk '{ print $1}')"
+	findomain -t $1 -u findomain_$1.txt &>/dev/null
+	echo "[+] Running Findomain => $(wc -l findomain_$1.txt | awk '{ print $1}')"
 }
 function 16subfinder() {
 	subfinder -silent -d $1 -o subfinder_$1.txt &>/dev/null
-	echo "[+] Subfinder Over => $(wc -l subfinder_$1.txt|awk '{ print $1}')"
+	echo "[+] Running Subfinder => $(wc -l subfinder_$1.txt|awk '{ print $1}')"
 }
 function 17amass_passive() {
 	amass enum -passive -norecursive -noalts -d $1 -o amass_$1.txt &>/dev/null
-	echo "[+] Amass Over => $(wc -l amass_$1.txt|awk '{ print $1}')"
+	echo "[+] Running Amass (passive) => $(wc -l amass_$1.txt|awk '{ print $1}')"
 }
 function 17amass_active_brute() {
 	amass enum -brute -min-for-recursive 2 -d $1 -o amass_$1.txt &>/dev/null
-	echo "[+] Amass Over => $(wc -l amass_$1.txt|awk '{ print $1}')"
+	echo "[+] Runningn Amass (active+brute) => $(wc -l amass_$1.txt|awk '{ print $1}')"
 }
 
 function 18assetfinder() {
 	assetfinder --subs-only $1 > assetfinder_$1.txt
-	echo "[+] Assetfinder Over => $(wc -l  assetfinder_$1.txt|awk '{ print $1}')"
+	echo "[+] Running Assetfinder => $(wc -l  assetfinder_$1.txt|awk '{ print $1}')"
 }
 function 19rapiddns() {
 	curl -s "https://rapiddns.io/subdomain/$1?full=1#result" | grep -oaEi "https?://[^\"\\'> ]+" | grep $1 | cut -d "/" -f3 | sort -u >rapiddns_$1.txt
-	echo "[+] Rapiddns Over => $(wc -l rapiddns_$1.txt|awk '{ print $1}')"
+	echo "[+] Running Rapiddns => $(wc -l rapiddns_$1.txt|awk '{ print $1}')"
 }
 
 #############################################################################################################
@@ -316,7 +319,7 @@ args="${1}";
 		-h|--help|*)
 			echo -e "Usage : "
 			echo -e "  -i | --install   installs required tools"
-			echo -e "  -s | --small     Crt, Warchive, Dnsbuffer, Threatcrowd, Hackertarget, Certspotter, Abubis-DB, Virustotal,Alienvault, Urlscan, Threatminer, entrust, Riddler, Dnsdumpster Rapiddns"
+			echo -e "  -s | --small     Crt, Warchive, Dnsbuffer, Threatcrowd, Hackertarget, Certspotter, Abubis-DB, Alienvault, Urlscan, Threatminer, entrust, Riddler, Dnsdumpster Rapiddns"
 			echo -e "  -a | --all       Crt, Web-Archive, Dnsbuffer, Threatcrowd, Hackertarget, Certspotter, Anubisdb, Virustotal, Alienvault, Urlscan, Threatminer,  Entrust, Riddler, Dnsdumpster, Findomain, Subfinder, Amass, Assetfinder, Rapiddns"
 			echo -e "  bash sub.sh -s example.com"
 			echo -e "  bash sub.sh -a example.com"

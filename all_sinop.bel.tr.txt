@@ -1,0 +1,17 @@
+360.sinop.bel.tr
+api.sinop.bel.tr
+app.sinop.bel.tr
+calendar.sinop.bel.tr
+dosya.sinop.bel.tr
+kentbilgi.sinop.bel.tr
+link.posta.sinop.bel.tr
+link.sinop.bel.tr
+mobil.sinop.bel.tr
+panel.sinop.bel.tr
+posta.sinop.bel.tr
+qr.sinop.bel.tr
+webportal.sinop.bel.tr
+www.mobil.sinop.bel.tr
+www.posta.sinop.bel.tr
+www.sinop.bel.tr
+www.webportal.sinop.bel.tr

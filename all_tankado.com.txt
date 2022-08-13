@@ -1,0 +1,12 @@
+ebooks.tankado.com
+ece.tankado.com
+github.tankado.com
+istiklal.tankado.com
+light-bot-www.tankado.com
+mail.tankado.com
+phpmysqlconsole.tankado.com
+php.tankado.com
+pinterest.tankado.com
+raspberry-pi.tankado.com
+www.tankado.com
+youtube.tankado.com
