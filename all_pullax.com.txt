@@ -1,5 +1,0 @@
-0.pullax.com
-autodiscover.pullax.com
-mail.pullax.com
-test.pullax.com
-www.pullax.com

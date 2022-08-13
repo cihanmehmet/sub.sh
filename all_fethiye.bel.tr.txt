@@ -1,8 +1,0 @@
-autodiscover.fethiye.bel.tr
-ftp.fethiye.bel.tr
-keos.fethiye.bel.tr
-mail.fethiye.bel.tr
-webportal.fethiye.bel.tr
-www.fethiye.bel.tr
-www.webportal.fethiye.bel.tr
-yayin.fethiye.bel.tr
