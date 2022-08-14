@@ -70,13 +70,10 @@ function 7anubisdb(){
 	echo "[+] Querying Anubis-DB(jonlu.ca) => $(wc -l anubisdb_$1.txt|awk '{ print $1}')"
 }
 function 8virustotal(){
-
 # Removed at 13.8.22 because of CAPTCHA protection
-
 #	curl -s "https://www.virustotal.com/ui/domains/$1/subdomains?limit=40"|jq -r '.' 2>/dev/null |grep id|grep -o "\w.*$1"|cut -d '"' -f3|egrep -v " " > virustotal_$1.txt
 #	echo "[+] Querying VirusTotal => $(wc -l virustotal_$1.txt|awk '{ print $1}')"
-
-	echo "[+] Querying VirusTotal => Failed. CAPTCHA protection"
+#	echo "[+] Querying VirusTotal => Failed. CAPTCHA protection"
 }
 function 9alienvault(){
 	curl -s "https://otx.alienvault.com/api/v1/indicators/domain/$1/passive_dns"|jq '.passive_dns[].hostname' 2>/dev/null |grep -o "\w.*$1"|sort -u > alienvault_$1.txt
@@ -322,7 +319,7 @@ args="${1}";
 			echo -e "Usage : "
 			echo -e "  -i | --install   installs required tools"
 			echo -e "  -s | --small     Crt, Warchive, Dnsbuffer, Threatcrowd, Hackertarget, Certspotter, Abubis-DB, Alienvault, Urlscan, Threatminer, entrust, Riddler, Dnsdumpster Rapiddns"
-			echo -e "  -a | --all       Crt, Web-Archive, Dnsbuffer, Threatcrowd, Hackertarget, Certspotter, Anubisdb, Virustotal, Alienvault, Urlscan, Threatminer,  Entrust, Riddler, Dnsdumpster, Findomain, Subfinder, Amass, Assetfinder, Rapiddns"
+			echo -e "  -a | --all       Crt, Web-Archive, Dnsbuffer, Threatcrowd, Hackertarget, Certspotter, Anubisdb, Alienvault, Urlscan, Threatminer,  Entrust, Riddler, Dnsdumpster, Findomain, Subfinder, Amass, Assetfinder, Rapiddns"
 			echo -e "  bash sub.sh -s example.com"
 			echo -e "  bash sub.sh -a example.com"
 			echo -e "  curl -sL https://bit.ly/3bUdFHv | bash /dev/stdin -s example.com"
