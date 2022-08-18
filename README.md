@@ -46,7 +46,7 @@ curl -sL bit.ly/3bUdFHv | bash /dev/stdin -s example.com
 ./sub.sh -a example.com
 ```
 ### Usufull tips
-```poweshell
+```console
 # STEP-1: To enumerate a domain list first eliminate dublicateds (e.g: domain.lst)
 cat domains.lst | sort -u > domains-unique.lst
 # and supply line by line to sub.sh
