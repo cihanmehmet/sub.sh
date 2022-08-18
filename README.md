@@ -45,6 +45,20 @@ curl -sL bit.ly/3bUdFHv | bash /dev/stdin -s example.com
 ```powershell
 ./sub.sh -a example.com
 ```
+### Usufull tips
+```poweshell
+# STEP-1: To enumerate a domain list first eliminate dublicateds (e.g: domain.lst)
+cat domains.lst | sort -u > domains-unique.lst
+# and supply line by line to sub.sh
+for d in $(cat domains-unique.lst); do ./sub.sh -a $d; done
+# STEP-2: after enumeration completed first remove all*.txt (if you want backup first)
+rm all*.txt
+# and collect subdomains list in a file
+cat *.txt > all-subs.lst
+# then remove dublicateds
+cat all-subs.lst | sort -u > all-subs-uniq.lst
+
+```
 ## Automatic install of required tools
 ```powershell
 ./sub.sh -i

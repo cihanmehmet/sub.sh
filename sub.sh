@@ -74,7 +74,7 @@ function 8virustotal(){
 #	curl -s "https://www.virustotal.com/ui/domains/$1/subdomains?limit=40"|jq -r '.' 2>/dev/null |grep id|grep -o "\w.*$1"|cut -d '"' -f3|egrep -v " " > virustotal_$1.txt
 #	echo "[+] Querying VirusTotal => $(wc -l virustotal_$1.txt|awk '{ print $1}')"
 #	echo "[+] Querying VirusTotal => Failed. CAPTCHA protection"
-	echo ""
+	echo "" > virustotal_$1.txt
 }
 function 9alienvault(){
 	curl -s "https://otx.alienvault.com/api/v1/indicators/domain/$1/passive_dns"|jq '.passive_dns[].hostname' 2>/dev/null |grep -o "\w.*$1"|sort -u > alienvault_$1.txt
