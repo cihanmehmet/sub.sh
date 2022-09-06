@@ -141,7 +141,7 @@ function commonToolInstall(){
 	if [ -e ~/go/bin/subfinder ] || [ -e /usr/local/bin/subfinder ] || [ -e ~/go-workspace/bin/subfinder ] || [ -e ~/gopath/bin/subfinder ] ; then
 	      echo -e "${BLUE}[!] Subfinder already exists \n${RESET}"
 	else 
-		go install github.com/projectdiscovery/subfinder/cmd/subfinder@latest
+		go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 		echo -e "${RED}[!] Subfinder installed \n${RESET}"
 	fi
 
@@ -157,9 +157,10 @@ function commonToolInstall(){
 	else
 	    case "$(uname -a)" in
 	        *Debian*|*Ubuntu*|*Linux*|*Fedora*)
-	         	wget https://github.com/Edu4rdSHL/findomain/releases/latest/download/findomain-linux
-			sudo chmod +x findomain-linux
-			sudo mv findomain-linux /usr/local/bin/findomain
+			curl -LO https://github.com/findomain/findomain/releases/latest/download/findomain-linux-i386.zip
+			unzip findomain-linux-i386.zip
+			chmod +x findomain
+			sudo mv findomain /usr/bin/findomain
 			echo -e "${RED}[!] Findomain installed \n${RESET}"
 	            ;;
 	        *)
@@ -213,12 +214,12 @@ function installOSX(){
 	brew cleanup
 	source ~/.bashrc ~/.zshrc;
 }
-function installFedora(){
-    sudo yum -y update
-    sudo yum install jq;
-    sudo yum install parallel;
-	commonToolInstall
 
+function installFedora(){
+        sudo yum -y update
+        sudo yum install jq;
+        sudo yum install parallel;
+        commonToolInstall
 	source ~/.bashrc ~/.zshrc;
 }
 

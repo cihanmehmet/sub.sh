@@ -33,20 +33,30 @@
 + Subfinder
 + Assetfinder
 ```
+## INSTALL
+```powershell
+git clone https://github.com/enseitankado/sub.sh
+cd sub.sh/
+./sub.sh -i
+```
 ## USAGES
-### Script usage: Small scan
+### Small scan
 ```powershell
 ./sub.sh -s example.com
 ```
 ```powershell
 curl -sL bit.ly/3bUdFHv | bash /dev/stdin -s example.com
 ```
-### Script usage: Complete scan
+### Complete scan
 ```powershell
 ./sub.sh -a example.com
 ```
+### Command Line Help
+```powershell
+./sub.sh -h
+```
 ### Usufull tips
-```shell
+```bash
 # STEP-1: To enumerate a domain list first eliminate dublicateds (e.g: domain.lst)
 cat domains.lst | sort -u > domains-unique.lst
 # and supply line by line to sub.sh
@@ -59,40 +69,9 @@ cat *.txt > all-subs.lst
 cat all-subs.lst | sort -u > all-subs-uniq.lst
 
 ```
-## Automatic install of required tools
-```powershell
-./sub.sh -i
-```
-### If you already have a GO, you should make the following settings;
-```powershell
-nano ~/.bashrc or  nano ~/.zshrc             
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-```
-```powershell
-source ~/.bashrc ; source ~/.zshrc
-```
-### The following tools working with go language have been installed.
-```powershell
-go get -u github.com/projectdiscovery/subfinder/cmd/subfinder
-go get -u github.com/tomnomnom/assetfinder
-go get -v -u github.com/OWASP/Amass/v3/...
-```
 ## Demo
-Use this link to test sub.sh directly in your browser. Now:
+Use this link to test sub.sh directly in your browser. Dont forget install required tools with ./sub.sh -i Now:
 ###
 [![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/enseitankado/sub.sh&tutorial=README.md)
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-## Subdomain detection terminal shortcut function
-### nano ~/.zshrc
-or
-### nano ~/.bashrc
-
-```powershell
-function subdomain() { curl -sL bit.ly/3bUdFHv | bash /dev/stdin "$1" "$2" }
-```
-## Usage
-```powershell
-subdomain example.com
-```
