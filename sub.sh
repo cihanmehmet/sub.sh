@@ -115,15 +115,14 @@ function commonToolInstall(){
 	if [ -e ~/go/bin/httprobe ] || [ -e /usr/local/bin/httprobe ] || [ -e ~/go-workspace/bin/httprobe ] || [ -e ~/gopath/bin/httprobe ] ; then
 	      echo -e "${BLUE}[!] httprobe already exists \n${RESET}"
 	else 
-		go get -u github.com/tomnomnom/httprobe
-  
+		go install github.com/tomnomnom/httprobe@latest
 		echo -e "${RED}[!] httprobe installed \n${RESET}"
 	fi
 
 	if [ -e ~/go/bin/subfinder ] || [ -e /usr/local/bin/subfinder ] || [ -e ~/go-workspace/bin/subfinder ] || [ -e ~/gopath/bin/subfinder ] ; then
 	      echo -e "${BLUE}[!] Subfinder already exists \n${RESET}"
 	else 
-		go get -u -v github.com/projectdiscovery/subfinder/cmd/subfinder
+		go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 		echo -e "${RED}[!] Subfinder installed \n${RESET}"
 	fi
 
@@ -131,20 +130,20 @@ function commonToolInstall(){
 	    echo -e "${BLUE}[!] Assetfinder already exists \n${RESET}"
 	   
 	else 
-		go get -u github.com/tomnomnom/assetfinder
+		go install github.com/tomnomnom/assetfinder@latest
 		echo -e "${RED}[!] Assetfinder installed \n${RESET}"
 	fi
 
 	if [ -e /usr/local/bin/findomain ] ; then
-	   
 	   echo -e "${BLUE}[!] Findomain already exists \n${RESET}"
 	   
 	else 
 	    case "$(uname -a)" in
 	        *Debian*|*Ubuntu*|*Linux*|*Fedora*)
-	         	wget https://github.com/Edu4rdSHL/findomain/releases/latest/download/findomain-linux
-				sudo chmod +x findomain-linux
-				sudo mv findomain-linux /usr/local/bin/findomain
+	         	wget https://github.com/Findomain/Findomain/releases/download/9.0.4/findomain-aarch64.zip
+				unzip findomain-aarch64.zip
+				sudo chmod +x findomain
+				sudo mv findomain-linux /usr/local/bin/
 				echo -e "${RED}[!] Findomain installed \n${RESET}"
 	            ;;
 	        *)
@@ -230,7 +229,7 @@ function install(){
 }
 #############################################################################################################
 function subsave(){
-	cat no_resolve_$1.txt|httprobe -c 50 > httprobe_$1.txt
+	cat no_resolve_$1.txt|httprobe -c 50 >> httprobe_$1.txt
 	cat httprobe_$1.txt|cut -d "/" -f3|sort -u|tee $1.txt
 	#-----------------------------------------------------------------------------------
 	echo -e "█████████████████████████████████████████████████████████████████"
